@@ -1,42 +1,183 @@
 ﻿<!doctype html>
 <html lang="es-PE">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nuova · Propuestas de landing</title>
-<meta name="robots" content="noindex">
-<link rel="icon" href="assets/img/cropped-icono-nuova-2-192x192.png">
-<link rel="stylesheet" href="assets/fonts/fonts.css">
-<style>
-:root{--ink:#1e1e1c;--y:#ffd207;--paper:#f2efe6;--mute:#b9b5a9;--line:#45443f}
-*{box-sizing:border-box;margin:0}
-body{font-family:'Chivo',system-ui,sans-serif;background:var(--ink);color:var(--paper);line-height:1.5;padding:clamp(24px,5vw,64px) clamp(16px,4vw,56px)}
-::selection{background:var(--y);color:var(--ink)}
-:focus-visible{outline:2px solid var(--y);outline-offset:4px}
-header{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;max-width:1320px;margin:0 auto 40px}
-header img{height:44px;width:auto}
-h1{font-weight:900;font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-.03em;line-height:1}
-header p{color:var(--mute);max-width:52ch}
-ol{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;max-width:1320px;margin:0 auto}
-li a{display:block;text-decoration:none;color:inherit;border:1.5px solid var(--line);transition:border-color .2s,transform .3s cubic-bezier(.16,1,.3,1)}
-li a:hover{border-color:var(--y);transform:translateY(-4px)}
-li img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;display:block;border-bottom:1.5px solid var(--line)}
-.t{padding:18px 20px 22px}
-.t b{display:block;font-size:24px;font-weight:900;letter-spacing:-.02em}
-.t span{display:block;color:var(--mute);margin-top:6px;font-size:15.5px}
-.t em{font-style:normal;font-family:'Chivo Mono',monospace;font-size:12.5px;color:var(--y);letter-spacing:.05em;text-transform:uppercase}
-@media (max-width:900px){ol{grid-template-columns:1fr}}
-</style>
-</head>
-<body>
-<header>
-  <!-- <div><img src="assets/img/logo-nuova-light-1.png" alt="Nuova" width="900" height="300"><h1 style="margin-top:22px">Tres propuestas de landing B2B</h1></div>
-  <p>Una misma landing para cadenas retail, en tres direcciones visuales. Ábrelas, compáralas y elige una para afinarla.</p> -->
-</header>
-<ol>
-  <li><a href="propuesta-a-despacho.html"><img src="assets/previews/a.png" alt="Vista previa de la propuesta Despacho"><div class="t"><em>Propuesta A</em><b>Despacho</b><span>Cartón kraft, cinta de embalaje y etiquetas de envío. La tienda sale de la planta hacia 24 departamentos y el formulario es la etiqueta de despacho.</span></div></a></li>
-  <li><a href="propuesta-b-cenefa.html"><img src="assets/previews/b.png" alt="Vista previa de la propuesta Cenefa"><div class="t"><em>Propuesta B</em><b>Cenefa</b><span>La página es una góndola: parantes perforados, cenefas amarillas y habladores colgantes. Es el idioma diario del comprador retail.</span></div></a></li>
-  <li><a href="propuesta-c-plano.html"><img src="assets/previews/c.png" alt="Vista previa de la propuesta Plano"><div class="t"><em>Propuesta C</em><b>Plano</b><span>Plano de tienda interactivo sobre negro #1E1E1C: los muebles se equipan fase por fase, de diseño 3D a instalación.</span></div></a></li>
-</ol>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nuova · Propuestas de landing</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="assets/img/cropped-icono-nuova-2-192x192.png" />
+    <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <style>
+      :root {
+        --ink: #1e1e1c;
+        --y: #ffd207;
+        --paper: #f2efe6;
+        --mute: #b9b5a9;
+        --line: #45443f;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      body {
+        font-family: "Chivo", system-ui, sans-serif;
+        background: var(--ink);
+        color: var(--paper);
+        line-height: 1.5;
+        padding: clamp(24px, 5vw, 64px) clamp(16px, 4vw, 56px);
+      }
+      ::selection {
+        background: var(--y);
+        color: var(--ink);
+      }
+      :focus-visible {
+        outline: 2px solid var(--y);
+        outline-offset: 4px;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 24px;
+        flex-wrap: wrap;
+        max-width: 1320px;
+        margin: 0 auto 40px;
+      }
+      header img {
+        height: 44px;
+        width: auto;
+      }
+      h1 {
+        font-weight: 900;
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        letter-spacing: -0.03em;
+        line-height: 1;
+      }
+      header p {
+        color: var(--mute);
+        max-width: 52ch;
+      }
+      ol {
+        list-style: none;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+        max-width: 1320px;
+        margin: 0 auto;
+      }
+      li a {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        border: 1.5px solid var(--line);
+        transition:
+          border-color 0.2s,
+          transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      li a:hover {
+        border-color: var(--y);
+        transform: translateY(-4px);
+      }
+      li img {
+        width: 100%;
+        aspect-ratio: 16/10;
+        object-fit: cover;
+        object-position: top;
+        display: block;
+        border-bottom: 1.5px solid var(--line);
+      }
+      .t {
+        padding: 18px 20px 22px;
+      }
+      .t b {
+        display: block;
+        font-size: 24px;
+        font-weight: 900;
+        letter-spacing: -0.02em;
+      }
+      .t span {
+        display: block;
+        color: var(--mute);
+        margin-top: 6px;
+        font-size: 15.5px;
+      }
+      .t em {
+        font-style: normal;
+        font-family: "Chivo Mono", monospace;
+        font-size: 18.5px;
+        color: var(--y);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+      @media (max-width: 900px) {
+        ol {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <img
+          src="assets/img/logo-nuova-light-1.png"
+          alt="Nuova"
+          width="900"
+          height="300"
+        />
+        <h1 style="margin-top: 22px">Selecciona una de las tres propuestas de landing Page</h1>
+      </div>
+      <!-- <p>Una misma landing para cadenas retail, en tres direcciones visuales. Ábrelas, compáralas y elige una para afinarla.</p> -->
+    </header>
+    <ol>
+      <li>
+        <a href="propuesta-a-despacho.html"
+          ><img
+            src="assets/previews/a.png"
+            alt="Vista previa de la propuesta Despacho"
+          />
+          <div class="t">
+            <em>Propuesta A</em>
+            <!-- <b>Despacho</b
+            ><span
+              >Cartón kraft, cinta de embalaje y etiquetas de envío. La tienda
+              sale de la planta hacia 24 departamentos y el formulario es la
+              etiqueta de despacho.</span
+            > -->
+          </div>
+          </a>
+      </li>
+      <li>
+        <a href="propuesta-b-cenefa.html"
+          ><img
+            src="assets/previews/b.png"
+            alt="Vista previa de la propuesta Cenefa"
+          />
+          <div class="t">
+            <em>Propuesta B</em>
+            <!-- <b>Cenefa</b
+            ><span
+              >La página es una góndola: parantes perforados, cenefas amarillas
+              y habladores colgantes. Es el idioma diario del comprador
+              retail.</span
+            > -->
+          </div>
+          </a>
+      </li>
+      <li>
+        <a href="propuesta-c-plano.html"
+          ><img
+            src="assets/previews/c.png"
+            alt="Vista previa de la propuesta Plano"
+          />
+          <div class="t">
+            <em>Propuesta C</em>
+            <!-- <b>Plano</b><span>Plano de tienda interactivo sobre negro #1E1E1C: los muebles se
+              equipan fase por fase, de diseño 3D a instalación.</span> -->
+          </div>
+          </a>
+      </li>
+    </ol>
+  </body>
 </html>
