@@ -1,0 +1,1278 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-19T03:54:38+00:00",
+  "title": "Design System: Nuova Perú · Landing corporativa",
+  "extensions": {
+    "status": {
+      "finalWorld": "pending-client-choice",
+      "candidates": [
+        "a",
+        "b",
+        "c"
+      ],
+      "onSelection": "Delete the two unchosen entries under extensions.worlds, their components (by \"world\") and their narrative rules and dos/donts, and their prefixed tokens in the DESIGN.md frontmatter; promote the chosen world into the canonical sections and drop its prefix."
+    },
+    "shared": {
+      "colorMeta": {
+        "brand-yellow": {
+          "role": "primary",
+          "displayName": "Nuova Yellow",
+          "canonical": "#ffd207",
+          "oklch": "oklch(87.7% 0.179 93.0)",
+          "tonalRamp": [
+            "#100b00",
+            "#2e2401",
+            "#504001",
+            "#755f00",
+            "#9c7f06",
+            "#c5a106",
+            "#efc503",
+            "#ffeeb9"
+          ]
+        },
+        "brand-ink": {
+          "role": "neutral",
+          "displayName": "Nuova Ink",
+          "canonical": "#1e1e1c",
+          "oklch": "oklch(23.4% 0.004 106.7)",
+          "tonalRamp": [
+            "#0b0b09",
+            "#252523",
+            "#424240",
+            "#61615f",
+            "#828280",
+            "#a5a5a2",
+            "#c9c9c6",
+            "#efefec"
+          ]
+        }
+      },
+      "logos": {
+        "onLight": "nuova-logo-black.png",
+        "onDark": "assets/img/logo-nuova-light-1.png",
+        "favicon": "assets/img/cropped-icono-nuova-2-192x192.png",
+        "clients": "assets/clientes/logo-{n}.png (12 real Nuova clients shown)"
+      },
+      "fonts": "assets/fonts/fonts.css (self-hosted woff2, latin + latin-ext)",
+      "voice": "Spanish (Perú); professional and close; direct commercial messaging aimed at chains and roll-outs.",
+      "leadForm": {
+        "script": "assets/js/lead.js",
+        "selector": "form[data-lead]",
+        "fieldWrapper": "[data-campo] with [data-error] live region",
+        "departments": "select[data-departamentos] (24 departments + Callao, Lima preselected)",
+        "validation": "required fields; telefono ^9\\d{8}$ (optional +51); correo pattern; tiendas >= 1; aria-invalid plus specific Spanish error text",
+        "submit": "No endpoint yet; opens wa.me/51903260296 with a composed message; button shows \"Abriendo WhatsApp…\" for 2.5s; [data-ok] revealed and focused",
+        "onlineState": "[data-estado], Mon–Sat 8:00–18:00 Lima time (UTC-5); body.is-off greys the dot"
+      },
+      "whatsappFab": {
+        "size": "58px",
+        "position": "fixed, right 18px, bottom 18px",
+        "shape": "circle",
+        "icon": "inline SVG, 30px, white",
+        "hover": "scale(1.06)",
+        "green": {
+          "a": "#1f7a35",
+          "b": "#16772f",
+          "c": "#1f8a3c"
+        }
+      },
+      "motion": [
+        {
+          "name": "ease-house",
+          "value": "cubic-bezier(.16,1,.3,1)",
+          "purpose": "Shared ease for lifts, swaps and reveals in all worlds."
+        },
+        {
+          "name": "reduced-motion",
+          "value": "prefers-reduced-motion: reduce cancels all animation and transition",
+          "purpose": "All worlds."
+        }
+      ],
+      "truth": [
+        "Prospects (Sodimac, Promart, Plaza Vea, Tottus, Oechsle) are never shown as clients.",
+        "Proof is limited to nuova.pe facts.",
+        "Renders are captioned \"Diseño 3D\"; the plan is \"ilustrativo · medidas referenciales\"; missing photos are marked as placeholders."
+      ]
+    },
+    "worlds": {
+      "a": {
+        "name": "Propuesta A: Despacho",
+        "artifact": "propuesta-a-despacho.html",
+        "contract": ".impeccable/surfaces/propuesta-a-despacho-html.md",
+        "northStar": "The Dispatch",
+        "thesis": "every store opening is a shipment leaving Nuova's Ate plant, labelled for its destination.",
+        "tokenPrefix": "a-",
+        "colorMeta": {
+          "a-kraft": {
+            "role": "neutral",
+            "displayName": "Kraft Board",
+            "canonical": "#c9a173",
+            "oklch": "oklch(73.5% 0.078 70.1)",
+            "tonalRamp": [
+              "#140800",
+              "#361f00",
+              "#5c3907",
+              "#7d592c",
+              "#a07a4d",
+              "#c59d6f",
+              "#eac192",
+              "#ffebd5"
+            ]
+          },
+          "a-kraft-lo": {
+            "role": "neutral",
+            "displayName": "Kraft Shadow",
+            "canonical": "#b88d5e",
+            "oklch": "oklch(67.4% 0.082 68.2)",
+            "tonalRamp": [
+              "#140800",
+              "#371f00",
+              "#5e3802",
+              "#805829",
+              "#a3794a",
+              "#c79c6c",
+              "#edc08f",
+              "#feebd7"
+            ]
+          },
+          "a-label": {
+            "role": "neutral",
+            "displayName": "Label Stock",
+            "canonical": "#f7f3ea",
+            "oklch": "oklch(96.5% 0.013 86.8)",
+            "tonalRamp": [
+              "#0d0b06",
+              "#28251e",
+              "#45423a",
+              "#646159",
+              "#86827a",
+              "#a8a59c",
+              "#cdc9c0",
+              "#f2eee5"
+            ]
+          },
+          "a-ink-brown": {
+            "role": "neutral",
+            "displayName": "Burnt Ink",
+            "canonical": "#3b3226",
+            "oklch": "oklch(32.3% 0.024 74.7)",
+            "tonalRamp": [
+              "#110a02",
+              "#2c2318",
+              "#4a4034",
+              "#696052",
+              "#8b8173",
+              "#aea395",
+              "#d3c7b8",
+              "#f8eddd"
+            ]
+          },
+          "a-field-label": {
+            "role": "neutral",
+            "displayName": "Field Label Brown",
+            "canonical": "#4a4237",
+            "oklch": "oklch(38.4% 0.021 75.8)",
+            "tonalRamp": [
+              "#100a03",
+              "#2b241a",
+              "#494136",
+              "#686054",
+              "#8a8175",
+              "#ada497",
+              "#d1c8ba",
+              "#f7eddf"
+            ]
+          },
+          "a-focus-wash": {
+            "role": "neutral",
+            "displayName": "Focus Wash",
+            "canonical": "#fff8d6",
+            "oklch": "oklch(97.6% 0.045 97.5)",
+            "tonalRamp": [
+              "#0f0b00",
+              "#2b2508",
+              "#484226",
+              "#686244",
+              "#898364",
+              "#aca686",
+              "#d1caa9",
+              "#f6efce"
+            ]
+          },
+          "a-error": {
+            "role": "error",
+            "displayName": "Stamp Red",
+            "canonical": "#a3160b",
+            "oklch": "oklch(45.9% 0.175 29.8)",
+            "tonalRamp": [
+              "#1f0000",
+              "#4d0100",
+              "#800601",
+              "#af2519",
+              "#d74e3d",
+              "#ff7461",
+              "#feb4a7",
+              "#fee9e5"
+            ]
+          },
+          "a-night-rule": {
+            "role": "neutral",
+            "displayName": "Night Rule",
+            "canonical": "#4a4339",
+            "oklch": "oklch(38.7% 0.019 76.8)",
+            "tonalRamp": [
+              "#100a04",
+              "#2a241b",
+              "#484137",
+              "#676055",
+              "#898176",
+              "#aca498",
+              "#d0c8bc",
+              "#f6ede1"
+            ]
+          },
+          "a-night-text": {
+            "role": "neutral",
+            "displayName": "Night Text",
+            "canonical": "#d9cfbf",
+            "oklch": "oklch(85.8% 0.024 79.7)",
+            "tonalRamp": [
+              "#110a02",
+              "#2b2417",
+              "#494133",
+              "#696052",
+              "#8a8172",
+              "#ada494",
+              "#d2c8b8",
+              "#f7eddd"
+            ]
+          },
+          "a-night-mute": {
+            "role": "neutral",
+            "displayName": "Night Small Print",
+            "canonical": "#a99f90",
+            "oklch": "oklch(70.7% 0.024 78.2)",
+            "tonalRamp": [
+              "#110a02",
+              "#2c2418",
+              "#494134",
+              "#696052",
+              "#8a8172",
+              "#aea494",
+              "#d2c8b8",
+              "#f8eddd"
+            ]
+          },
+          "a-whatsapp": {
+            "role": "secondary",
+            "displayName": "WhatsApp Green (A)",
+            "canonical": "#1f7a35",
+            "oklch": "oklch(51.1% 0.134 147.4)",
+            "tonalRamp": [
+              "#001002",
+              "#002f0c",
+              "#02511b",
+              "#177530",
+              "#419751",
+              "#66bc73",
+              "#8ae196",
+              "#c9ffce"
+            ]
+          }
+        },
+        "tokens": {
+          "colors": {
+            "a-kraft": "#c9a173",
+            "a-kraft-lo": "#b88d5e",
+            "a-label": "#f7f3ea",
+            "a-ink-brown": "#3b3226",
+            "a-field-label": "#4a4237",
+            "a-focus-wash": "#fff8d6",
+            "a-error": "#a3160b",
+            "a-night-rule": "#4a4339",
+            "a-night-text": "#d9cfbf",
+            "a-night-mute": "#a99f90",
+            "a-whatsapp": "#1f7a35"
+          },
+          "rounded": {
+            "none": "0",
+            "sm": "2px"
+          },
+          "spacing": {
+            "gutter": "clamp(16px,4vw,56px)",
+            "max": "1320px",
+            "section": "clamp(64px,8vw,120px)",
+            "field": "10px 18px 8px"
+          },
+          "fonts": {
+            "display": "'Big Shoulders Stencil Display',Arial Narrow,sans-serif",
+            "body": "'Archivo',system-ui,sans-serif"
+          }
+        },
+        "typographyMeta": {
+          "a-display": {
+            "displayName": "Stencil Display",
+            "purpose": "Hero and closing headlines, uppercase."
+          },
+          "a-headline": {
+            "displayName": "Stencil Headline",
+            "purpose": "Section heads."
+          },
+          "a-title": {
+            "displayName": "Stencil Title",
+            "purpose": "Route-sheet steps, crate and pictogram titles."
+          },
+          "a-body": {
+            "displayName": "Archivo Body",
+            "purpose": "Running text."
+          },
+          "a-lead": {
+            "displayName": "Archivo Lead",
+            "purpose": "Hero and section ledes."
+          },
+          "a-label": {
+            "displayName": "Label Caption",
+            "purpose": "Uppercase field and panel captions."
+          },
+          "a-button": {
+            "displayName": "Button",
+            "purpose": "Uppercase button labels at 90% width."
+          }
+        },
+        "shadows": [
+          {
+            "name": "a-tape",
+            "value": "0 2px 0 rgba(0,0,0,.06),0 6px 14px -8px rgba(60,35,10,.55)",
+            "purpose": "Packing tape lying on kraft."
+          },
+          {
+            "name": "a-label",
+            "value": "0 1px 0 rgba(255,255,255,.4) inset,0 22px 40px -22px rgba(60,35,10,.75),0 3px 6px -2px rgba(60,35,10,.35)",
+            "purpose": "Shipping label panels."
+          },
+          {
+            "name": "a-print",
+            "value": "0 18px 30px -20px rgba(60,35,10,.8)",
+            "purpose": "Photo prints."
+          },
+          {
+            "name": "a-crate",
+            "value": "0 26px 40px -26px rgba(60,35,10,.9)",
+            "purpose": "Sticky product crate."
+          },
+          {
+            "name": "a-button-lift",
+            "value": "0 8px 16px -8px rgba(30,30,28,.7)",
+            "purpose": "Button hover only."
+          }
+        ],
+        "motion": [
+          {
+            "name": "ease-house",
+            "value": "cubic-bezier(.16,1,.3,1)",
+            "purpose": "Shared ease for lifts, swaps and reveals in all worlds."
+          },
+          {
+            "name": "a-tape-pull",
+            "value": "clip-path inset(0 100% 0 0) to inset(0), 1.1s cubic-bezier(.16,1,.3,1) .15s",
+            "purpose": "Top tape pulls across once on load."
+          },
+          {
+            "name": "a-crate-swap",
+            "value": "opacity .35s, transform .6s to scale(.98)",
+            "purpose": "Product image swap."
+          },
+          {
+            "name": "a-list-indent",
+            "value": "padding .35s cubic-bezier(.16,1,.3,1)",
+            "purpose": "Product list item indents 18px on hover or selection."
+          }
+        ],
+        "breakpoints": [
+          {
+            "name": "lg",
+            "value": "1080px"
+          },
+          {
+            "name": "md",
+            "value": "760px"
+          },
+          {
+            "name": "sm",
+            "value": "440px"
+          }
+        ],
+        "signatureInteraction": "Choosing a destination re-routes the label: destination code, route line, barcode and number update; the board marks the matching cell pressed. The top tape pulls across once on load."
+      },
+      "b": {
+        "name": "Propuesta B: Cenefa",
+        "artifact": "propuesta-b-cenefa.html",
+        "contract": ".impeccable/surfaces/propuesta-b-cenefa-html.md",
+        "northStar": "The Gondola",
+        "thesis": "content sits on shelves, and every claim is a shelf-edge hablador.",
+        "tokenPrefix": "b-",
+        "colorMeta": {
+          "b-steel": {
+            "role": "neutral",
+            "displayName": "Powder Steel",
+            "canonical": "#f1f1ee",
+            "oklch": "oklch(95.7% 0.004 106.5)",
+            "tonalRamp": [
+              "#0b0b09",
+              "#252523",
+              "#424240",
+              "#61615f",
+              "#828280",
+              "#a5a5a2",
+              "#c9c9c6",
+              "#efefec"
+            ]
+          },
+          "b-steel-2": {
+            "role": "neutral",
+            "displayName": "Steel Shadow",
+            "canonical": "#e4e4df",
+            "oklch": "oklch(91.7% 0.007 106.5)",
+            "tonalRamp": [
+              "#0b0b08",
+              "#252522",
+              "#42423e",
+              "#61615d",
+              "#83837e",
+              "#a5a5a1",
+              "#c9c9c5",
+              "#efefea"
+            ]
+          },
+          "b-upright": {
+            "role": "neutral",
+            "displayName": "Upright Grey",
+            "canonical": "#d3d4cf",
+            "oklch": "oklch(86.8% 0.007 115.7)",
+            "tonalRamp": [
+              "#0b0c08",
+              "#252522",
+              "#42423e",
+              "#61625d",
+              "#82837e",
+              "#a5a6a1",
+              "#c9cac5",
+              "#eeefea"
+            ]
+          },
+          "b-upright-edge": {
+            "role": "neutral",
+            "displayName": "Upright Edge",
+            "canonical": "#bdbeb8",
+            "oklch": "oklch(79.9% 0.008 114.3)",
+            "tonalRamp": [
+              "#0b0c08",
+              "#252621",
+              "#42433e",
+              "#61625c",
+              "#82837d",
+              "#a5a6a0",
+              "#c9cac4",
+              "#eeefe9"
+            ]
+          },
+          "b-shelf-white": {
+            "role": "neutral",
+            "displayName": "Shelf White",
+            "canonical": "#ffffff",
+            "oklch": "oklch(100.0% 0.000 89.9)",
+            "tonalRamp": [
+              "#0b0b0b",
+              "#252525",
+              "#424242",
+              "#616161",
+              "#828282",
+              "#a5a5a5",
+              "#c9c9c9",
+              "#eeeeee"
+            ]
+          },
+          "b-yellow-lip": {
+            "role": "primary",
+            "displayName": "Cenefa Lip",
+            "canonical": "#e9bd00",
+            "oklch": "oklch(81.4% 0.166 91.8)",
+            "tonalRamp": [
+              "#100b00",
+              "#2f2400",
+              "#514002",
+              "#765e01",
+              "#9d7f07",
+              "#c6a107",
+              "#f0c41b",
+              "#ffeebb"
+            ]
+          },
+          "b-ink-2": {
+            "role": "neutral",
+            "displayName": "Graphite",
+            "canonical": "#4a4a45",
+            "oklch": "oklch(40.7% 0.008 106.8)",
+            "tonalRamp": [
+              "#0b0b08",
+              "#252521",
+              "#42423d",
+              "#62625c",
+              "#83837d",
+              "#a5a5a0",
+              "#c9c9c4",
+              "#efefe9"
+            ]
+          },
+          "b-error": {
+            "role": "error",
+            "displayName": "Error Red",
+            "canonical": "#b3150a",
+            "oklch": "oklch(48.9% 0.190 29.7)",
+            "tonalRamp": [
+              "#1f0000",
+              "#4c0200",
+              "#800501",
+              "#b4170c",
+              "#dd4636",
+              "#fe7462",
+              "#feb3a7",
+              "#fee9e5"
+            ]
+          },
+          "b-night-text": {
+            "role": "neutral",
+            "displayName": "Night Text",
+            "canonical": "#cfcfc8",
+            "oklch": "oklch(85.3% 0.010 106.6)",
+            "tonalRamp": [
+              "#0c0b07",
+              "#252520",
+              "#42423d",
+              "#62625b",
+              "#83837c",
+              "#a5a59f",
+              "#cacac3",
+              "#efefe8"
+            ]
+          },
+          "b-whatsapp": {
+            "role": "secondary",
+            "displayName": "WhatsApp Green (B)",
+            "canonical": "#16772f",
+            "oklch": "oklch(50.0% 0.138 147.1)",
+            "tonalRamp": [
+              "#001002",
+              "#002e0b",
+              "#005119",
+              "#12752d",
+              "#3f984f",
+              "#64bc71",
+              "#89e194",
+              "#c9ffce"
+            ]
+          }
+        },
+        "tokens": {
+          "colors": {
+            "b-steel": "#f1f1ee",
+            "b-steel-2": "#e4e4df",
+            "b-upright": "#d3d4cf",
+            "b-upright-edge": "#bdbeb8",
+            "b-shelf-white": "#ffffff",
+            "b-yellow-lip": "#e9bd00",
+            "b-ink-2": "#4a4a45",
+            "b-error": "#b3150a",
+            "b-night-text": "#cfcfc8",
+            "b-whatsapp": "#16772f"
+          },
+          "rounded": {
+            "sm": "2px",
+            "md": "3px"
+          },
+          "spacing": {
+            "gutter": "clamp(16px,3.5vw,48px)",
+            "max": "1360px",
+            "post": "clamp(18px,2.4vw,34px)",
+            "section": "clamp(72px,9vw,128px)",
+            "slotUnit": "25px"
+          },
+          "fonts": {
+            "display": "'Barlow Condensed',Arial Narrow,sans-serif",
+            "body": "'Barlow',system-ui,sans-serif"
+          }
+        },
+        "typographyMeta": {
+          "b-display": {
+            "displayName": "Condensed Display",
+            "purpose": "Hero headline on the hablador."
+          },
+          "b-headline": {
+            "displayName": "Condensed Headline",
+            "purpose": "Section heads."
+          },
+          "b-numeral": {
+            "displayName": "Price Numeral",
+            "purpose": "Big tag figures."
+          },
+          "b-title": {
+            "displayName": "Tag Title",
+            "purpose": "Step and tag titles."
+          },
+          "b-body": {
+            "displayName": "Barlow Body",
+            "purpose": "Running text."
+          },
+          "b-lede": {
+            "displayName": "Barlow Lede",
+            "purpose": "Section ledes."
+          },
+          "b-label": {
+            "displayName": "Condensed Label",
+            "purpose": "Field labels, chips, captions."
+          },
+          "b-button": {
+            "displayName": "Button",
+            "purpose": "Uppercase condensed button labels."
+          }
+        },
+        "shadows": [
+          {
+            "name": "b-cenefa",
+            "value": "0 -3px 0 #e9bd00 inset,0 10px 18px -12px rgba(30,30,28,.5)",
+            "purpose": "Yellow shelf edge with shaded lip."
+          },
+          {
+            "name": "b-hablador",
+            "value": "0 18px 28px -16px rgba(30,30,28,.55),0 2px 0 #e9bd00",
+            "purpose": "Hanging tag; ink variant lip #000, white variant lip #c9c9c2."
+          },
+          {
+            "name": "b-product-tag",
+            "value": "0 2px 0 rgba(0,0,0,.08),0 10px 16px -12px rgba(0,0,0,.5)",
+            "purpose": "Rail tags."
+          },
+          {
+            "name": "b-upright",
+            "value": "inset 2px 0 0 #bdbeb8,inset -2px 0 0 #bdbeb8",
+            "purpose": "Perforated upright edges."
+          },
+          {
+            "name": "b-button-lift",
+            "value": "0 10px 18px -10px rgba(0,0,0,.7)",
+            "purpose": "Button hover only."
+          }
+        ],
+        "motion": [
+          {
+            "name": "ease-house",
+            "value": "cubic-bezier(.16,1,.3,1)",
+            "purpose": "Shared ease for lifts, swaps and reveals in all worlds."
+          },
+          {
+            "name": "b-swing",
+            "value": "1.1s cubic-bezier(.3,.7,.4,1), damped rotation around the clip (-5, +3, -1.5, +.6deg from rest)",
+            "purpose": "Tags swing once on hover; the hero tag swings once on load (1.6s, .3s delay)."
+          },
+          {
+            "name": "b-display-swap",
+            "value": "opacity .3s, transform .5s translateY(8px), source swap at 160ms",
+            "purpose": "Product photo swap."
+          },
+          {
+            "name": "b-nav-underline",
+            "value": "background-size .3s cubic-bezier(.16,1,.3,1)",
+            "purpose": "4px yellow underline grows on hover."
+          }
+        ],
+        "breakpoints": [
+          {
+            "name": "lg",
+            "value": "1180px"
+          },
+          {
+            "name": "md",
+            "value": "820px"
+          },
+          {
+            "name": "sm",
+            "value": "560px"
+          }
+        ],
+        "signatureInteraction": "Clicking a product hablador swaps the display photo and specs; unselected tags dim to 0.6 while the rail is hovered; tags swing once on their clip on hover."
+      },
+      "c": {
+        "name": "Propuesta C: Plano",
+        "artifact": "propuesta-c-plano.html",
+        "contract": ".impeccable/surfaces/propuesta-c-plano-html.md",
+        "northStar": "The Floor Plan",
+        "thesis": "Nuova draws, builds and installs every fixture on the plan.",
+        "tokenPrefix": "c-",
+        "colorMeta": {
+          "c-ground-2": {
+            "role": "neutral",
+            "displayName": "Sheet",
+            "canonical": "#262624",
+            "oklch": "oklch(26.8% 0.004 106.6)",
+            "tonalRamp": [
+              "#0b0b0a",
+              "#252523",
+              "#424240",
+              "#61615f",
+              "#828280",
+              "#a5a5a3",
+              "#c9c9c7",
+              "#efefec"
+            ]
+          },
+          "c-line": {
+            "role": "neutral",
+            "displayName": "Linework",
+            "canonical": "#5e5b53",
+            "oklch": "oklch(47.1% 0.013 89.8)",
+            "tonalRamp": [
+              "#0d0b05",
+              "#27251e",
+              "#45423a",
+              "#646159",
+              "#85827a",
+              "#a8a59c",
+              "#ccc9c0",
+              "#f2eee5"
+            ]
+          },
+          "c-line-hi": {
+            "role": "neutral",
+            "displayName": "Linework High",
+            "canonical": "#8f8b80",
+            "oklch": "oklch(63.7% 0.017 90.3)",
+            "tonalRamp": [
+              "#0e0b04",
+              "#28251c",
+              "#454238",
+              "#656157",
+              "#868277",
+              "#a9a599",
+              "#cdc9bd",
+              "#f3eee2"
+            ]
+          },
+          "c-paper": {
+            "role": "neutral",
+            "displayName": "Drafting Paper",
+            "canonical": "#f2efe6",
+            "oklch": "oklch(95.2% 0.012 91.5)",
+            "tonalRamp": [
+              "#0d0b06",
+              "#27251e",
+              "#44423b",
+              "#646159",
+              "#85827a",
+              "#a8a59c",
+              "#ccc9c0",
+              "#f1eee5"
+            ]
+          },
+          "c-mute": {
+            "role": "neutral",
+            "displayName": "Pencil Grey",
+            "canonical": "#b9b5a9",
+            "oklch": "oklch(77.3% 0.017 91.6)",
+            "tonalRamp": [
+              "#0e0b04",
+              "#28251b",
+              "#454238",
+              "#656156",
+              "#868277",
+              "#a9a599",
+              "#cdc9bd",
+              "#f3eee2"
+            ]
+          },
+          "c-focus-wash": {
+            "role": "neutral",
+            "displayName": "Cell Focus",
+            "canonical": "#2b2a27",
+            "oklch": "oklch(28.5% 0.006 91.6)",
+            "tonalRamp": [
+              "#0c0b09",
+              "#262522",
+              "#43423f",
+              "#62615e",
+              "#83827f",
+              "#a6a5a1",
+              "#cac9c5",
+              "#f0eeea"
+            ]
+          },
+          "c-error": {
+            "role": "error",
+            "displayName": "Error Coral",
+            "canonical": "#ff8a7a",
+            "oklch": "oklch(75.8% 0.145 29.0)",
+            "tonalRamp": [
+              "#1f0000",
+              "#4d0000",
+              "#7d0e09",
+              "#a3372d",
+              "#ca5b4d",
+              "#f27e6f",
+              "#ffb3a7",
+              "#ffe9e5"
+            ]
+          },
+          "c-online": {
+            "role": "secondary",
+            "displayName": "Online Green",
+            "canonical": "#3ccf62",
+            "oklch": "oklch(75.4% 0.194 147.9)",
+            "tonalRamp": [
+              "#001002",
+              "#002e0d",
+              "#02511c",
+              "#02762c",
+              "#079d3e",
+              "#2cc458",
+              "#5dea7c",
+              "#c9ffcf"
+            ]
+          },
+          "c-whatsapp": {
+            "role": "secondary",
+            "displayName": "WhatsApp Green (C)",
+            "canonical": "#1f8a3c",
+            "oklch": "oklch(55.7% 0.149 147.8)",
+            "tonalRamp": [
+              "#001002",
+              "#002e0d",
+              "#03511c",
+              "#02762c",
+              "#34994b",
+              "#5bbe6d",
+              "#81e390",
+              "#c9ffcf"
+            ]
+          }
+        },
+        "tokens": {
+          "colors": {
+            "ground": "{colors.brand-ink}",
+            "c-ground-2": "#262624",
+            "c-line": "#5e5b53",
+            "c-line-hi": "#8f8b80",
+            "c-paper": "#f2efe6",
+            "c-mute": "#b9b5a9",
+            "c-focus-wash": "#2b2a27",
+            "c-error": "#ff8a7a",
+            "c-online": "#3ccf62",
+            "c-whatsapp": "#1f8a3c"
+          },
+          "rounded": {
+            "none": "0",
+            "sm": "2px"
+          },
+          "spacing": {
+            "gutter": "clamp(16px,3.5vw,48px)",
+            "max": "1400px",
+            "section": "clamp(72px,9vw,132px)",
+            "grid": "32px",
+            "cell": "10px 16px 9px"
+          },
+          "fonts": {
+            "display": "'Chivo',system-ui,sans-serif",
+            "body": "'Chivo',system-ui,sans-serif",
+            "mono": "'Chivo Mono',ui-monospace,monospace"
+          }
+        },
+        "typographyMeta": {
+          "c-display": {
+            "displayName": "Chivo Display",
+            "purpose": "Hero and closing headlines, one yellow emphasis word."
+          },
+          "c-headline": {
+            "displayName": "Chivo Headline",
+            "purpose": "Section heads."
+          },
+          "c-title": {
+            "displayName": "Step Title",
+            "purpose": "Process steps; dimmed until active."
+          },
+          "c-body": {
+            "displayName": "Chivo Body",
+            "purpose": "Running text in Pencil Grey."
+          },
+          "c-label": {
+            "displayName": "Sheet Label",
+            "purpose": "Uppercase sheet bars, table heads, field labels."
+          },
+          "c-mono": {
+            "displayName": "Chivo Mono",
+            "purpose": "Codes, dimensions, sheet numbers and figures only."
+          },
+          "c-button": {
+            "displayName": "Button",
+            "purpose": "Sentence-case button labels."
+          }
+        },
+        "shadows": [
+          {
+            "name": "c-tooltip",
+            "value": "0 14px 28px -12px rgba(0,0,0,.8)",
+            "purpose": "Fixture tooltip lifted off the sheet."
+          },
+          {
+            "name": "c-cutout",
+            "value": "drop-shadow(0 18px 18px rgba(0,0,0,.55))",
+            "purpose": "Cut-out product in the legend photo (filter)."
+          },
+          {
+            "name": "c-button-lift",
+            "value": "0 10px 20px -10px rgba(0,0,0,.8)",
+            "purpose": "Button hover only."
+          }
+        ],
+        "motion": [
+          {
+            "name": "ease-house",
+            "value": "cubic-bezier(.16,1,.3,1)",
+            "purpose": "Shared ease for lifts, swaps and reveals in all worlds."
+          },
+          {
+            "name": "c-fixture-fill",
+            "value": "fill .5s cubic-bezier(.16,1,.3,1), stroke .4s, delay calc(var(--i)*28ms)",
+            "purpose": "Fixtures fill phase by phase, staggered."
+          },
+          {
+            "name": "c-step-focus",
+            "value": "opacity .4s (0.58 to 1)",
+            "purpose": "Active process step title."
+          },
+          {
+            "name": "c-tooltip",
+            "value": "opacity .15s",
+            "purpose": "Fixture tooltip reveal."
+          }
+        ],
+        "breakpoints": [
+          {
+            "name": "lg",
+            "value": "1100px"
+          },
+          {
+            "name": "md",
+            "value": "760px"
+          },
+          {
+            "name": "plan-text",
+            "value": "600px"
+          },
+          {
+            "name": "sm",
+            "value": "440px"
+          }
+        ],
+        "signatureInteraction": "Plan fixtures fill yellow phase by phase (outline, hatch, solid, truck), driven by the phase toggles in the hero and by IntersectionObserver in the process section; hovering or tapping a fixture isolates its type and shows a leader-line tooltip with a reference dimension."
+      }
+    }
+  },
+  "components": [
+    {
+      "name": "WhatsApp FAB",
+      "kind": "button",
+      "refersTo": "whatsapp-fab",
+      "world": "shared",
+      "description": "Fixed 58px round WhatsApp button, bottom-right, on every world; green tuned per world (shown with A green).",
+      "html": "<a class=\"ds-fab\" href=\"https://wa.me/51903260296\" aria-label=\"WhatsApp\"><svg viewBox=\"0 0 24 24\" width=\"30\" height=\"30\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z\"/></svg></a>",
+      "css": ".ds-fab{width:58px;height:58px;border-radius:50%;background:#1f7a35;color:#fff;display:grid;place-items:center;box-shadow:0 10px 24px -8px rgba(0,0,0,.6);transition:transform .2s} .ds-fab:hover{transform:scale(1.06)} .ds-fab:focus-visible{outline:3px solid #1e1e1c;outline-offset:3px}"
+    },
+    {
+      "name": "A · Primary Button",
+      "kind": "button",
+      "refersTo": "a-button-primary",
+      "world": "a",
+      "description": "Ink button with yellow label; Despacho primary action.",
+      "html": "<button class=\"ds-a-btn\">Despachar solicitud <svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></button>",
+      "css": ".ds-a-btn{display:inline-flex;align-items:center;gap:.6em;font:800 16px/1 'Archivo',system-ui,sans-serif;font-stretch:90%;letter-spacing:.02em;text-transform:uppercase;padding:15px 22px;border:2px solid #1e1e1c;border-radius:2px;background:#1e1e1c;color:#ffd207;cursor:pointer;transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .2s} .ds-a-btn:hover{transform:translateY(-2px);box-shadow:0 8px 16px -8px rgba(30,30,28,.7)} .ds-a-btn:active{transform:none;box-shadow:none} .ds-a-btn:focus-visible{outline:3px solid #1e1e1c;outline-offset:3px}"
+    },
+    {
+      "name": "A · Ghost Button",
+      "kind": "button",
+      "refersTo": "a-button-ghost",
+      "world": "a",
+      "description": "Outlined ink button that fills on hover.",
+      "html": "<a class=\"ds-a-ghost\" href=\"#\">Cotizar proyecto</a>",
+      "css": ".ds-a-ghost{display:inline-flex;font:800 16px/1 'Archivo',system-ui,sans-serif;font-stretch:90%;letter-spacing:.02em;text-transform:uppercase;text-decoration:none;padding:15px 22px;border:2px solid #1e1e1c;border-radius:2px;background:transparent;color:#1e1e1c;transition:background .2s,color .2s,transform .2s cubic-bezier(.16,1,.3,1)} .ds-a-ghost:hover{background:#1e1e1c;color:#ffd207;transform:translateY(-2px)} .ds-a-ghost:focus-visible{outline:3px solid #1e1e1c;outline-offset:3px}"
+    },
+    {
+      "name": "A · Shipping Label Field",
+      "kind": "input",
+      "refersTo": "a-label-field",
+      "world": "a",
+      "description": "Ruled label cell: 11px uppercase caption, borderless input, ink underline and focus wash on focus.",
+      "html": "<div class=\"ds-a-fld\"><label for=\"ds-a-e\">Empresa</label><input id=\"ds-a-e\" placeholder=\"Nombre de la cadena\"></div>",
+      "css": ".ds-a-fld{background:#f7f3ea;border:3px solid #1e1e1c;padding:10px 18px 8px;max-width:320px} .ds-a-fld:focus-within{background:#fff8d6} .ds-a-fld label{display:block;font:800 11px/1.2 'Archivo',system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#4a4237} .ds-a-fld input{width:100%;border:0;border-bottom:2px solid transparent;background:transparent;font:600 17px/1.3 'Archivo',system-ui,sans-serif;color:#1e1e1c;padding:4px 0 2px} .ds-a-fld input::placeholder{color:#6b6153} .ds-a-fld input:focus{outline:none;border-bottom-color:#1e1e1c}"
+    },
+    {
+      "name": "A · Packing Tape",
+      "kind": "custom",
+      "refersTo": null,
+      "world": "a",
+      "description": "Full-width yellow tape, stencil phrase in whole units; pulls across once on load.",
+      "html": "<div class=\"ds-a-tape\"><span>Nuova</span><i></i><span>Este lado arriba</span><i></i><span>Frágil</span></div>",
+      "css": ".ds-a-tape{display:flex;align-items:center;justify-content:space-between;gap:1.1em;padding:.7em 16px;background:#ffd207;color:#1e1e1c;font:900 18px/1 'Big Shoulders Stencil Display',Arial Narrow,sans-serif;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;box-shadow:0 2px 0 rgba(0,0,0,.06),0 6px 14px -8px rgba(60,35,10,.55);animation:ds-a-pull 1.1s cubic-bezier(.16,1,.3,1) .15s both} .ds-a-tape i{width:.55em;height:.55em;background:#1e1e1c;transform:rotate(45deg)} @keyframes ds-a-pull{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}} @media (prefers-reduced-motion:reduce){.ds-a-tape{animation:none}}"
+    },
+    {
+      "name": "B · Primary Button",
+      "kind": "button",
+      "refersTo": "b-button-primary",
+      "world": "b",
+      "description": "Ink button, yellow condensed label, 3px radius.",
+      "html": "<button class=\"ds-b-btn\">Cotizar <svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></button>",
+      "css": ".ds-b-btn{display:inline-flex;align-items:center;gap:.55em;font:800 19px/1 'Barlow Condensed',Arial Narrow,sans-serif;letter-spacing:.04em;text-transform:uppercase;padding:15px 24px;border:0;border-radius:3px;background:#1e1e1c;color:#ffd207;cursor:pointer;transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .2s} .ds-b-btn:hover{transform:translateY(-2px);box-shadow:0 10px 18px -10px rgba(0,0,0,.7)} .ds-b-btn:active{transform:none;box-shadow:none} .ds-b-btn:focus-visible{outline:3px solid #1e1e1c;outline-offset:3px}"
+    },
+    {
+      "name": "B · Cenefa Input",
+      "kind": "input",
+      "refersTo": "b-input",
+      "world": "b",
+      "description": "50px white input with 2px ink border on the yellow cenefa bar.",
+      "html": "<div class=\"ds-b-bar\"><label for=\"ds-b-e\">Empresa</label><input id=\"ds-b-e\" placeholder=\"Nombre de la cadena\"></div>",
+      "css": ".ds-b-bar{background:#ffd207;padding:18px 20px 20px;box-shadow:0 -3px 0 #e9bd00 inset,0 10px 18px -12px rgba(30,30,28,.5);max-width:340px} .ds-b-bar label{display:block;font:700 13px/1 'Barlow Condensed',Arial Narrow,sans-serif;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;color:#1e1e1c} .ds-b-bar input{width:100%;height:50px;border:2px solid #1e1e1c;border-radius:3px;background:#fff;font:600 17px 'Barlow',system-ui,sans-serif;color:#1e1e1c;padding:0 12px;box-sizing:border-box} .ds-b-bar input::placeholder{color:#6a6a63} .ds-b-bar input:focus{outline:none;box-shadow:0 0 0 3px #1e1e1c}"
+    },
+    {
+      "name": "B · Hablador",
+      "kind": "card",
+      "refersTo": "b-hablador",
+      "world": "b",
+      "description": "Yellow shelf-edge price tag with dark clip; swings once on hover.",
+      "html": "<div class=\"ds-b-tag\"><div class=\"ds-b-big\">24<sup>dptos.</sup></div><h3>Envío a todo el país</h3></div>",
+      "css": ".ds-b-tag{position:relative;display:inline-block;margin-top:20px;background:#ffd207;color:#1e1e1c;padding:26px 26px 22px;box-shadow:0 18px 28px -16px rgba(30,30,28,.55),0 2px 0 #e9bd00;transform-origin:50% -14px;transform:rotate(-1deg)} .ds-b-tag::before{content:'';position:absolute;left:50%;top:-18px;width:34px;height:24px;margin-left:-17px;border-radius:4px 4px 2px 2px;background:linear-gradient(180deg,#3a3a36,#1e1e1c)} .ds-b-big{font:900 96px/.8 'Barlow Condensed',Arial Narrow,sans-serif;font-variant-numeric:tabular-nums;display:flex;gap:6px} .ds-b-big sup{font-size:.3em;margin-top:.25em;text-transform:uppercase} .ds-b-tag h3{font:800 24px/1.05 'Barlow Condensed',Arial Narrow,sans-serif;text-transform:uppercase;margin:14px 0 0;padding-top:12px;border-top:2px solid currentColor} .ds-b-tag:hover{animation:ds-b-swing 1.1s cubic-bezier(.3,.7,.4,1)} @keyframes ds-b-swing{0%{transform:rotate(-6deg)}35%{transform:rotate(2deg)}60%{transform:rotate(-2.5deg)}80%{transform:rotate(-.4deg)}100%{transform:rotate(-1deg)}} @media (prefers-reduced-motion:reduce){.ds-b-tag:hover{animation:none}}"
+    },
+    {
+      "name": "B · Product Tag",
+      "kind": "chip",
+      "refersTo": "b-product-tag",
+      "world": "b",
+      "description": "White clipped tag in the product rail; selected turns ink with yellow text; others dim while the rail is hovered.",
+      "html": "<div class=\"ds-b-rail\"><button class=\"ds-b-ptag\" aria-selected=\"true\"><b>Góndolas</b><small>33 productos</small></button><button class=\"ds-b-ptag\" aria-selected=\"false\"><b>Módulos</b><small>35 productos</small></button></div>",
+      "css": ".ds-b-rail{display:flex;gap:12px;padding:20px 14px 14px;background:#ffd207} .ds-b-ptag{all:unset;position:relative;cursor:pointer;background:#fff;color:#1e1e1c;border-radius:2px;padding:14px 14px 12px;box-shadow:0 2px 0 rgba(0,0,0,.08),0 10px 16px -12px rgba(0,0,0,.5);transition:background .2s,color .2s,opacity .25s} .ds-b-ptag::before{content:'';position:absolute;left:50%;top:-12px;width:24px;height:16px;margin-left:-12px;background:#2b2b28;border-radius:3px 3px 1px 1px} .ds-b-ptag b{display:block;font:900 22px/1 'Barlow Condensed',Arial Narrow,sans-serif;text-transform:uppercase} .ds-b-ptag small{display:block;margin-top:8px;font:700 13px/1 'Barlow Condensed',Arial Narrow,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#4a4a45} .ds-b-ptag[aria-selected=true]{background:#1e1e1c;color:#ffd207} .ds-b-ptag[aria-selected=true] small{color:#cfcfc8} .ds-b-ptag:focus-visible{outline:3px solid #1e1e1c;outline-offset:3px} .ds-b-rail:hover .ds-b-ptag[aria-selected=false]{opacity:.6} .ds-b-rail:hover .ds-b-ptag:hover{opacity:1}"
+    },
+    {
+      "name": "C · Primary Button",
+      "kind": "button",
+      "refersTo": "c-button-primary",
+      "world": "c",
+      "description": "Yellow button with ink label on the drafting ground.",
+      "html": "<button class=\"ds-c-btn\">Solicitar visita técnica <svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></button>",
+      "css": ".ds-c-btn{display:inline-flex;align-items:center;gap:.6em;font:800 16px/1 'Chivo',system-ui,sans-serif;letter-spacing:.01em;padding:16px 22px;border:0;border-radius:2px;background:#ffd207;color:#1e1e1c;cursor:pointer;transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .2s} .ds-c-btn:hover{transform:translateY(-2px);box-shadow:0 10px 20px -10px rgba(0,0,0,.8)} .ds-c-btn:active{transform:none;box-shadow:none} .ds-c-btn:focus-visible{outline:2px solid #ffd207;outline-offset:3px}"
+    },
+    {
+      "name": "C · Line Button",
+      "kind": "button",
+      "refersTo": "c-button-line",
+      "world": "c",
+      "description": "Transparent button with warm-grey inset ring that turns yellow on hover.",
+      "html": "<a class=\"ds-c-line\" href=\"#\">Solicitar visita técnica</a>",
+      "css": ".ds-c-line{display:inline-flex;font:800 16px/1 'Chivo',system-ui,sans-serif;text-decoration:none;padding:16px 22px;border-radius:2px;background:#1e1e1c;color:#f2efe6;box-shadow:inset 0 0 0 1.5px #8f8b80;transition:box-shadow .2s,color .2s} .ds-c-line:hover{box-shadow:inset 0 0 0 1.5px #ffd207;color:#ffd207} .ds-c-line:focus-visible{outline:2px solid #ffd207;outline-offset:3px}"
+    },
+    {
+      "name": "C · Title Block Cell",
+      "kind": "input",
+      "refersTo": "c-title-block-cell",
+      "world": "c",
+      "description": "Cajetín cell: uppercase caption, borderless input, yellow underline on focus.",
+      "html": "<div class=\"ds-c-cell\"><label for=\"ds-c-e\">Empresa</label><input id=\"ds-c-e\" placeholder=\"Nombre de la cadena\"></div>",
+      "css": ".ds-c-cell{background:#1e1e1c;border:1.5px solid #f2efe6;padding:10px 16px 9px;max-width:320px} .ds-c-cell:focus-within{background:#2b2a27} .ds-c-cell label{display:block;font:600 11.5px/1 'Chivo',system-ui,sans-serif;letter-spacing:.09em;text-transform:uppercase;color:#b9b5a9} .ds-c-cell input{width:100%;background:transparent;border:0;border-bottom:1.5px solid transparent;color:#f2efe6;font:600 16.5px/1.3 'Chivo',system-ui,sans-serif;padding:6px 0 3px} .ds-c-cell input::placeholder{color:#9a968b} .ds-c-cell input:focus{outline:none;border-bottom-color:#ffd207}"
+    },
+    {
+      "name": "C · Sheet Bar with Phases",
+      "kind": "nav",
+      "refersTo": "c-phase-active",
+      "world": "c",
+      "description": "Drawing-sheet title bar with mono sheet code and phase toggles; active phase is yellow.",
+      "html": "<div class=\"ds-c-bar\"><span>Lámina <code>A-01</code> · Planta de tienda</span><span class=\"ds-c-ph\"><button aria-pressed=\"true\">Diseño 3D</button><button aria-pressed=\"false\">Fabricación</button><button aria-pressed=\"false\">Instalación</button></span></div>",
+      "css": ".ds-c-bar{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:10px 14px;background-color:#262624;border:1.5px solid #5e5b53;font:600 12.5px/1 'Chivo',system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#b9b5a9;background-image:linear-gradient(rgba(242,239,230,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(242,239,230,.045) 1px,transparent 1px);background-size:32px 32px} .ds-c-bar code{font-family:'Chivo Mono',ui-monospace,monospace;font-weight:500;letter-spacing:.04em;color:#f2efe6} .ds-c-ph{display:flex;gap:4px} .ds-c-ph button{all:unset;cursor:pointer;font:700 13.5px/1 'Chivo',system-ui,sans-serif;padding:8px 10px;border-radius:2px;color:#b9b5a9;transition:background .2s,color .2s} .ds-c-ph button:hover{color:#f2efe6} .ds-c-ph button[aria-pressed=true]{background:#ffd207;color:#1e1e1c} .ds-c-ph button:focus-visible{outline:2px solid #ffd207;outline-offset:2px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Universo de Góndolas",
+    "overview": "Nuova sells corporate store roll-outs to large retail chains. The visual system is split into one durable brand layer and three candidate worlds. The brand layer holds what does not change whichever world wins: the binding yellow and near-black pair, the logo files, the Spanish (Perú) voice, the shared lead form and its WhatsApp hand-off, the proof and truth rules, and the WhatsApp floating button. Each world reads the same content through one physical metaphor taken from Nuova's own trade: the shipment leaving the Ate plant (A), the gondola shelf with its yellow cenefa and hanging hablador (B), and the store floor plan (C).\n\nEvery world is static HTML/CSS/JS with one inline `<style>` block, self-hosted fonts (`assets/fonts/fonts.css`) and the shared `assets/js/lead.js`. Every world honours `prefers-reduced-motion` by cancelling all animation and transition, and shares the house ease `cubic-bezier(.16,1,.3,1)`.",
+    "keyCharacteristics": [
+      "One binding colour pair, #FFD207 + #1E1E1C, used at full strength in every world; yellow is a material (tape, shelf edge, built fixture), never a decorative tint.",
+      "Heavy, tight display type (900 weight, line-height 0.8 to 0.98) over a plain, readable body face.",
+      "Square-cut forms: radii of 0 to 3px everywhere except the round WhatsApp button and status dot.",
+      "Numbers presented as manifest or sheet lines with tabular figures.",
+      "Only verifiable nuova.pe facts as proof; anything else is marked as a placeholder."
+    ],
+    "rules": [
+      {
+        "name": "The Binding Pair Rule",
+        "body": "#FFD207 and #1E1E1C appear in every world, unmodified. Text on yellow is always ink. No world swaps either colour for a nearby hue; B's darker yellow lip (b-yellow-lip) only shades the edge of a yellow object and is never a flat fill on its own.",
+        "section": "colors",
+        "world": "shared"
+      },
+      {
+        "name": "The Tape Owns The Seams Rule",
+        "body": "Yellow appears as full-width packing tape across section seams (top of page, after the hero, before the close) and as the strap holding each label. It is a material, not a scattered accent.",
+        "section": "colors",
+        "world": "a"
+      },
+      {
+        "name": "The Stencil Is Cargo Rule",
+        "body": "Stencil type is for things painted on the box: headlines, numbers, destination codes, list items. Running text and form input stay in Archivo.",
+        "section": "typography",
+        "world": "a"
+      },
+      {
+        "name": "The Paper-On-Board Rule",
+        "body": "Loose paper (labels, prints) may rotate up to ±0.8deg; rotation is removed at ≤1080px. Shadows stay warm brown (rgba(60,35,10,…)).",
+        "section": "elevation",
+        "world": "a"
+      },
+      {
+        "name": "The Cenefa Is The Shelf Rule",
+        "body": "Yellow bands with a darker lip mark where content rests: the top of the hero bay, the form bar, under section heads (12px), the process rail (22px), the gallery base (16px). Yellow is a shelf or a tag, not a highlight.",
+        "section": "colors",
+        "world": "b"
+      },
+      {
+        "name": "The Price Tag Rule",
+        "body": "Claims are numerals or short words in heavy condensed type sitting on a tag, with a 2px rule separating them from the explanation.",
+        "section": "typography",
+        "world": "b"
+      },
+      {
+        "name": "The Whole Slot Rule",
+        "body": "The perforated-upright pattern repeats in whole 25px units (`background-repeat: round`); a slot is never cut in half.",
+        "section": "elevation",
+        "world": "b"
+      },
+      {
+        "name": "The Yellow Is Installed Rule",
+        "body": "On the plan, yellow means built. Unbuilt fixtures are dashed Linework High; yellow fill arrives with the installation phase. Off the plan, yellow marks only the one primary action, the active state and a single emphasis word.",
+        "section": "colors",
+        "world": "c"
+      },
+      {
+        "name": "The Mono For Measures Rule",
+        "body": "Chivo Mono is used only for codes, dimensions, sheet numbers and figures. It never sets prose or headings.",
+        "section": "typography",
+        "world": "c"
+      },
+      {
+        "name": "The Sheet Rule",
+        "body": "The 32px drafting grid (`rgba(242,239,230,.045)` hairlines) appears only inside drawing sheets and the photo frame, never on the open page ground.",
+        "section": "elevation",
+        "world": "c"
+      }
+    ],
+    "dos": [
+      "Do write in Spanish (Perú), professional and close, speaking to chains and roll-outs rather than single shops.",
+      "Do limit proof to nuova.pe facts: \"+50 empresas\", \"cientos de negocios\", 24 departamentos, Google reviews 5★, and the product counts from the nuova.pe catalogue.",
+      "Do caption imagery as what it is: 3D renders as \"Diseño 3D · …\", the floor plan as \"Plano ilustrativo · medidas referenciales\", missing project photos as a visibly marked placeholder (\"Foto de proyecto pendiente\").",
+      "Do route every lead form through `form[data-lead]` and `assets/js/lead.js`, keeping WhatsApp +51 903 260 296 visible next to the form and as the fixed FAB.",
+      "Do draw every icon, pictogram and glyph as inline SVG.",
+      "Do number figures and steps like manifest lines (01, 02, N° 003) in tabular stencil figures.",
+      "Do keep forms and data panels as ruled shipping labels on Label Stock.",
+      "Do put claims on habladores and content on cenefa-edged shelves.",
+      "Do frame photo and product bays with perforated uprights in whole slot units.",
+      "Do number every drawing as a sheet (\"Lámina A-01\") and keep dimensions in Chivo Mono with tabular figures.",
+      "Do keep linework warm grey and reserve yellow fill for what Nuova builds."
+    ],
+    "donts": [
+      "Don't show Sodimac, Promart, Plaza Vea, Tottus or Oechsle as clients; they are prospects.",
+      "Don't invent years in business, plant size, capacity, certifications, named testimonials, delivery times or product dimensions.",
+      "Don't mix tokens or signature devices from two proposals on one surface.",
+      "Don't break the tape mid-phrase; it repeats only in whole units.",
+      "Don't use cool grey shadows or radii above 2px.",
+      "Don't use yellow as text colour on steel or as a thin accent line; it is a band or a tag.",
+      "Don't let a hablador hang without its clip.",
+      "Don't spread the drafting grid onto the page ground outside sheets.",
+      "Don't present plan measurements as real specifications; the plan stays \"ilustrativo · medidas referenciales\"."
+    ],
+    "dosByWorld": [
+      {
+        "world": "shared",
+        "text": "Do write in Spanish (Perú), professional and close, speaking to chains and roll-outs rather than single shops."
+      },
+      {
+        "world": "shared",
+        "text": "Do limit proof to nuova.pe facts: \"+50 empresas\", \"cientos de negocios\", 24 departamentos, Google reviews 5★, and the product counts from the nuova.pe catalogue."
+      },
+      {
+        "world": "shared",
+        "text": "Do caption imagery as what it is: 3D renders as \"Diseño 3D · …\", the floor plan as \"Plano ilustrativo · medidas referenciales\", missing project photos as a visibly marked placeholder (\"Foto de proyecto pendiente\")."
+      },
+      {
+        "world": "shared",
+        "text": "Do route every lead form through `form[data-lead]` and `assets/js/lead.js`, keeping WhatsApp +51 903 260 296 visible next to the form and as the fixed FAB."
+      },
+      {
+        "world": "shared",
+        "text": "Do draw every icon, pictogram and glyph as inline SVG."
+      },
+      {
+        "world": "a",
+        "text": "Do number figures and steps like manifest lines (01, 02, N° 003) in tabular stencil figures."
+      },
+      {
+        "world": "a",
+        "text": "Do keep forms and data panels as ruled shipping labels on Label Stock."
+      },
+      {
+        "world": "b",
+        "text": "Do put claims on habladores and content on cenefa-edged shelves."
+      },
+      {
+        "world": "b",
+        "text": "Do frame photo and product bays with perforated uprights in whole slot units."
+      },
+      {
+        "world": "c",
+        "text": "Do number every drawing as a sheet (\"Lámina A-01\") and keep dimensions in Chivo Mono with tabular figures."
+      },
+      {
+        "world": "c",
+        "text": "Do keep linework warm grey and reserve yellow fill for what Nuova builds."
+      }
+    ],
+    "dontsByWorld": [
+      {
+        "world": "shared",
+        "text": "Don't show Sodimac, Promart, Plaza Vea, Tottus or Oechsle as clients; they are prospects."
+      },
+      {
+        "world": "shared",
+        "text": "Don't invent years in business, plant size, capacity, certifications, named testimonials, delivery times or product dimensions."
+      },
+      {
+        "world": "shared",
+        "text": "Don't mix tokens or signature devices from two proposals on one surface."
+      },
+      {
+        "world": "a",
+        "text": "Don't break the tape mid-phrase; it repeats only in whole units."
+      },
+      {
+        "world": "a",
+        "text": "Don't use cool grey shadows or radii above 2px."
+      },
+      {
+        "world": "b",
+        "text": "Don't use yellow as text colour on steel or as a thin accent line; it is a band or a tag."
+      },
+      {
+        "world": "b",
+        "text": "Don't let a hablador hang without its clip."
+      },
+      {
+        "world": "c",
+        "text": "Don't spread the drafting grid onto the page ground outside sheets."
+      },
+      {
+        "world": "c",
+        "text": "Don't present plan measurements as real specifications; the plan stays \"ilustrativo · medidas referenciales\"."
+      }
+    ]
+  }
+}

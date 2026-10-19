@@ -1,0 +1,53 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "propuesta-c-plano.html"
+        ],
+        "createdAt": "2026-10-19T03:40:21.087Z",
+        "reason": "finish reviewer: .sec/.close are full-bleed sections under a border-top rule with 72-150px top padding visible in captures"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "propuesta-a-despacho.html"
+        ],
+        "createdAt": "2026-10-19T03:40:21.279Z",
+        "reason": "finish reviewer: .chain rows carry their own 22px padding (ruled table); .sec is a full-bleed band"
+      },
+      {
+        "rule": "codex-grid-background",
+        "value": "*",
+        "files": [
+          "propuesta-c-plano.html"
+        ],
+        "createdAt": "2026-10-19T03:40:21.473Z",
+        "reason": "direction contract: drafting-sheet grid is the committed world of Propuesta C, only inside sheets"
+      },
+      {
+        "rule": "flat-type-hierarchy",
+        "value": "*",
+        "files": [
+          "propuesta-c-plano.html"
+        ],
+        "createdAt": "2026-10-19T03:40:21.655Z",
+        "reason": "agent triage: h1 renders at 5.2rem and h2 at 4rem in captures; detector read collapsed sizes"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "propuesta-b-cenefa.html"
+        ],
+        "createdAt": "2026-10-19T03:40:44.614Z",
+        "reason": "finish reviewer: .bay__in/.gal shelves sit flush to uprights by design; .sec and .close__card carry generous padding in the render"
+      }
+    ]
+  }
+}

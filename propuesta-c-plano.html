@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="es-PE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nuova · Equipamiento integral de tiendas para cadenas</title>
+<meta name="description" content="Nuova diseña en 3D, fabrica, despacha e instala todo el mobiliario de tus tiendas: góndolas, check-outs, módulos y más, en los 24 departamentos del Perú.">
+<link rel="icon" href="assets/img/cropped-icono-nuova-2-192x192.png">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+:root{
+  --ground:#1e1e1c;
+  --ground-2:#262624;
+  --line:#5e5b53;
+  --line-hi:#8f8b80;
+  --paper:#f2efe6;
+  --mute:#b9b5a9;
+  --y:#ffd207;
+  --err:#ff8a7a;
+  --sans:'Chivo',system-ui,sans-serif;
+  --mono:'Chivo Mono',ui-monospace,monospace;
+  --gut:clamp(16px,3.5vw,48px);
+  --max:1400px;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scrollbar-color:var(--line-hi) var(--ground);accent-color:var(--y)}
+body{font-family:var(--sans);font-size:17px;line-height:1.55;color:var(--paper);background:var(--ground);caret-color:var(--y);-webkit-font-smoothing:antialiased}
+::selection{background:var(--y);color:var(--ground)}
+::-webkit-scrollbar{width:12px}::-webkit-scrollbar-track{background:var(--ground)}::-webkit-scrollbar-thumb{background:#4a4843;border:3px solid var(--ground);border-radius:6px}
+:focus-visible{outline:2px solid var(--y);outline-offset:3px}
+a{color:inherit;text-underline-offset:.22em}
+img{display:block;max-width:100%}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+svg.ico{width:1.1em;height:1.1em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* retícula de dibujo */
+.grid-bg{background-image:linear-gradient(rgba(242,239,230,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(242,239,230,.045) 1px,transparent 1px);background-size:32px 32px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6em;cursor:pointer;text-decoration:none;font:800 16px/1 var(--sans);letter-spacing:.01em;
+  padding:16px 22px;border:0;border-radius:2px;background:var(--y);color:var(--ground);transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .2s,background .2s,color .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 20px -10px rgba(0,0,0,.8)}
+.btn:active{transform:none;box-shadow:none}
+.btn:disabled{opacity:.6;cursor:progress;transform:none}
+.btn--line{background:transparent;color:var(--paper);box-shadow:inset 0 0 0 1.5px var(--line-hi)}
+.btn--line:hover{box-shadow:inset 0 0 0 1.5px var(--y);color:var(--y)}
+
+/* header */
+.top{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 0}
+.top img{height:44px;width:auto}
+.top nav{display:flex;gap:30px;font-size:15px;font-weight:600}
+.top nav a{text-decoration:none;color:var(--mute);transition:color .2s}
+.top nav a:hover{color:var(--y)}
+
+/* hero */
+.hero{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:0 clamp(28px,4vw,72px);align-items:end;padding:clamp(12px,2vw,28px) 0 clamp(48px,6vw,80px)}
+.hero h1{grid-column:1;font:900 clamp(3rem,5.4vw,5.2rem)/.92 var(--sans);letter-spacing:-.035em;max-width:13ch;text-wrap:balance}
+.hero h1 span{color:var(--y)}
+.hero__sub{grid-column:2;padding-bottom:6px}
+.hero .sheet{grid-column:1/3;margin-top:clamp(24px,2.6vw,36px)}
+.sheet__body{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(330px,1fr)}
+.sheet__plan{display:flex;flex-direction:column;justify-content:space-between;min-width:0}
+.hero__sub p{font-size:clamp(17px,1.4vw,19px);color:var(--mute);max-width:52ch}
+.hero__sub p strong{color:var(--paper);font-weight:600}
+
+.sheet{position:relative;border:1.5px solid var(--line);background:var(--ground-2)}
+.sheet__bar{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:10px 14px;border-bottom:1.5px solid var(--line);font:600 12.5px/1 var(--sans);letter-spacing:.08em;color:var(--mute);text-transform:uppercase}
+.code{font-family:var(--mono);font-weight:500;letter-spacing:.04em;color:var(--paper)}
+.phases{display:flex;gap:4px}
+.phases button{all:unset;cursor:pointer;font:700 13.5px/1 var(--sans);padding:8px 10px;border-radius:2px;color:var(--mute);transition:background .2s,color .2s}
+.phases button:hover{color:var(--paper)}
+.phases button[aria-pressed=true]{background:var(--y);color:var(--ground)}
+.phases button:focus-visible{outline:2px solid var(--y);outline-offset:2px}
+.plan{display:block;width:100%;height:auto}
+
+/* dibujo */
+.plan .wall{fill:none;stroke:var(--paper);stroke-width:5}
+.plan .door{stroke:var(--y);stroke-width:2;fill:none;stroke-dasharray:6 5}
+.plan .dim{stroke:var(--line-hi);stroke-width:1}
+.plan text{font-family:var(--sans);font-weight:600;fill:var(--mute);font-size:13px;letter-spacing:.08em}
+.plan text.mono{font-family:var(--mono);font-weight:500;letter-spacing:.04em}
+.plan text.lbl{fill:var(--paper);font-size:12px}
+.svc circle{fill:var(--ground);stroke:var(--paper);stroke-width:2}
+.svc path{fill:none;stroke:var(--paper);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.svc text{fill:var(--paper)}
+.plan .zone{fill:none;stroke:var(--line-hi);stroke-dasharray:4 4}
+.fx{cursor:pointer;outline:none}
+.fx rect,.fx path{fill:transparent;stroke:var(--line-hi);stroke-width:1.5;stroke-dasharray:5 4;
+  transition:fill .5s cubic-bezier(.16,1,.3,1) calc(var(--i,0)*28ms),stroke .4s calc(var(--i,0)*28ms),opacity .3s}
+.plan[data-phase="1"] .fx rect,.plan[data-phase="1"] .fx path{stroke:var(--y);stroke-dasharray:none}
+.plan[data-phase="2"] .fx rect,.plan[data-phase="2"] .fx path{stroke:var(--y);stroke-dasharray:none;fill:url(#hatch)}
+.plan[data-phase="3"] .fx rect,.plan[data-phase="3"] .fx path,.plan[data-phase="4"] .fx rect,.plan[data-phase="4"] .fx path{stroke:var(--y);stroke-dasharray:none;fill:var(--y)}
+.plan.is-focus .fx:not(.is-on){opacity:.28}
+.fx.is-on rect,.fx.is-on path{stroke:#fff;stroke-width:2.5}
+.plan[data-phase="4"] .truck{opacity:1}
+.truck{opacity:0;transition:opacity .4s}
+
+.tip{position:absolute;z-index:3;pointer-events:none;min-width:200px;background:var(--paper);color:var(--ground);padding:10px 12px;border-radius:2px;box-shadow:0 14px 28px -12px rgba(0,0,0,.8);
+  transform:translate(-50%,calc(-100% - 18px));opacity:0;transition:opacity .15s}
+.tip.is-on{opacity:1}
+.tip::after{content:"";position:absolute;left:50%;bottom:-18px;width:1.5px;height:18px;background:var(--paper)}
+.tip b{display:block;font-size:15px;font-weight:800}
+.tip span{display:block;font:500 12.5px/1.4 var(--mono);margin-top:3px}
+.sheet__note{padding:9px 14px;border-top:1.5px solid var(--line);font-size:13.5px;line-height:1.35;color:var(--mute);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* cajetín (title block) = formulario */
+.tb{border-left:1.5px solid var(--paper);background:var(--ground);display:flex;flex-direction:column}
+.tb__meta{margin-top:auto;display:grid;grid-template-columns:repeat(4,auto);border-top:1.5px solid var(--paper)}
+.tb__meta div{padding:8px 12px;border-left:1px solid var(--line);font-size:12.5px;line-height:1.3;color:var(--mute)}
+.tb__meta div:first-child{border-left:0}
+.tb__meta b{display:block;font:600 10.5px/1 var(--sans);letter-spacing:.09em;text-transform:uppercase;margin-bottom:4px}
+.tb__meta .code{font-size:13px}
+.tb__head{display:grid;grid-template-columns:1fr auto;border-bottom:1.5px solid var(--paper)}
+.tb__head h2{font:900 22px/1.1 var(--sans);letter-spacing:-.01em;padding:14px 16px}
+.tb__head .mono{border-left:1.5px solid var(--paper);padding:10px 14px;font-size:12px;line-height:1.4;color:var(--mute);text-transform:uppercase}
+.tb__head .mono b{display:block;color:var(--y);font-size:18px;font-weight:500}
+.cell{padding:10px 16px 9px;border-bottom:1px solid var(--line)}
+.cells2{display:grid;grid-template-columns:1fr 1fr}
+.cells2 .cell:first-child{border-right:1px solid var(--line)}
+.cell label{display:block;font:600 11.5px/1 var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--mute)}
+.cell input,.cell select{width:100%;background:transparent;border:0;border-bottom:1.5px solid transparent;color:var(--paper);font:600 16.5px/1.3 var(--sans);padding:6px 0 3px;border-radius:0;appearance:none;-webkit-appearance:none}
+.cell select{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23ffd207' stroke-width='2.2'/%3E%3C/svg%3E") right 2px center no-repeat;padding-right:22px;cursor:pointer}
+.cell select option{background:var(--ground);color:var(--paper)}
+.cell input::placeholder{color:#9a968b}
+.cell input:focus,.cell select:focus{outline:none;border-bottom-color:var(--y)}
+.cell:focus-within{background:#2b2a27}
+.cell [aria-invalid=true]{border-bottom-color:var(--err)}
+.cell [data-error]{display:block;font-size:12.5px;color:var(--err);margin-top:3px}
+.cell [data-error]:empty{display:none}
+.tb .btn{width:100%;border-radius:0;padding:19px 16px;font-size:17px}
+.tb__foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px;padding:11px 16px;font-size:14px;line-height:1.35;color:var(--mute);border-top:1.5px solid var(--paper)}
+.tb__foot a{color:var(--paper);white-space:nowrap}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#3ccf62;margin-right:7px}
+body.is-off .dot{background:#77736a;animation:none}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(60,207,98,.55)}70%{box-shadow:0 0 0 7px rgba(60,207,98,0)}100%{box-shadow:0 0 0 0 rgba(60,207,98,0)}}
+.ok{padding:14px 16px;background:var(--y);color:var(--ground);font-weight:700}
+.ok:focus{outline:none}
+
+/* secciones */
+.sec{padding:clamp(72px,9vw,132px) 0;border-top:1.5px solid var(--line)}
+.h2{font:900 clamp(2.4rem,4.6vw,4rem)/.98 var(--sans);letter-spacing:-.03em;max-width:17ch;text-wrap:balance}
+.lede{color:var(--mute);font-size:18.5px;max-width:50ch}
+.head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:clamp(24px,4vw,64px);align-items:end;margin-bottom:clamp(40px,5vw,64px)}
+
+/* leyenda */
+.legend{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:clamp(24px,4vw,64px);align-items:start}
+.legend table{width:100%;border-collapse:collapse}
+.legend th{text-align:left;font:600 12px/1 var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--mute);padding:0 12px 12px;border-bottom:1.5px solid var(--paper)}
+.legend td{padding:0;border-bottom:1px solid var(--line)}
+.legend tr.row{cursor:pointer;transition:background .2s}
+.legend tr.row:hover,.legend tr.row.is-on,.legend tr.row:focus-visible{background:#2b2a27;outline:none}
+.legend tr.row.is-on td:nth-child(2){color:var(--y)}
+.legend td>div{padding:16px 12px}
+.sym{width:56px}
+.sym svg{width:40px;height:28px;display:block}
+.sym rect,.sym path{fill:var(--y);stroke:var(--y)}
+.legend td:nth-child(2){font:800 21px/1.1 var(--sans);letter-spacing:-.01em}
+.legend td:nth-child(2) small{display:block;font:400 15px/1.35 var(--sans);color:var(--mute);letter-spacing:0;margin-top:4px}
+.legend td:nth-child(3){text-align:right;white-space:nowrap}
+.legend td:nth-child(3) div{font:500 14px/1 var(--mono);color:var(--paper)}
+.photo{position:sticky;top:24px;border:1.5px solid var(--line);background:var(--ground-2)}
+.photo__img{aspect-ratio:5/4;display:grid;place-items:center;overflow:hidden}
+.photo__img img{width:100%;height:100%;object-fit:cover;transition:opacity .3s,transform .6s cubic-bezier(.16,1,.3,1)}
+.photo__img img.is-fit{object-fit:contain;padding:6% 8%;filter:drop-shadow(0 18px 18px rgba(0,0,0,.55))}
+.photo__img img.is-swap{opacity:0;transform:scale(1.02)}
+.photo figcaption{display:flex;justify-content:space-between;gap:12px;padding:12px 14px;font:600 12.5px/1.3 var(--sans);letter-spacing:.08em;color:var(--mute);text-transform:uppercase;border-top:1.5px solid var(--line)}
+
+/* proceso con plano fijo */
+.proc{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(28px,5vw,80px)}
+.proc__plan{position:sticky;top:clamp(16px,6vh,60px);align-self:start}
+.proc__steps{display:grid;gap:0}
+.pstep{min-height:min(58vh,560px);display:flex;flex-direction:column;justify-content:center;padding:20px 0;border-top:1px solid var(--line);transition:opacity .4s}
+.pstep h3{opacity:.58;transition:opacity .4s}
+.pstep.is-on h3{opacity:1}
+.pstep h3{font:900 clamp(2rem,3.2vw,2.8rem)/1 var(--sans);letter-spacing:-.025em;margin:0 0 14px}
+.pstep p{color:var(--mute);max-width:44ch}
+.pstep ul{list-style:none;padding:0;margin-top:18px;display:grid;gap:8px;font:600 15.5px/1.35 var(--sans);color:var(--paper)}
+.pstep li::before{content:"";display:inline-block;width:10px;height:1.5px;background:var(--y);vertical-align:middle;margin-right:10px}
+
+/* cobertura */
+.cover{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,80px);align-items:start}
+.deps{columns:3;column-gap:28px;font:400 16px/2.1 var(--sans);color:var(--mute);padding:0;list-style:none}
+.deps li{break-inside:avoid;border-bottom:1px solid #34332f;display:flex;justify-content:space-between}
+.deps li span:last-child{color:#8f8b80;font-size:13.5px}
+.deps li.hq{color:var(--y)}
+.sched{width:100%;border-collapse:collapse;border:1.5px solid var(--paper)}
+.sched th{text-align:left;padding:12px 16px;border-bottom:1.5px solid var(--paper);font:800 16px/1.2 var(--sans)}
+.sched th.mono{text-align:right;font:500 15px/1.2 var(--mono);color:var(--y)}
+.sched td{padding:8px 16px 14px}
+.cells{margin-top:32px;border-collapse:collapse;border:1.5px solid var(--paper);width:100%;max-width:440px}
+.cells th{text-align:left;font:600 13px/1.2 var(--sans);color:var(--mute);padding:10px 14px 4px;border-left:1.5px solid var(--paper)}
+.cells td{padding:4px 14px 12px;border-left:1.5px solid var(--paper);font-size:26px;font-weight:500;color:var(--y)}
+.cells th:first-child,.cells td:first-child{border-left:0}
+.cells .stars span{font-size:16px;color:var(--paper);margin-left:6px}
+
+/* prueba */
+.proof{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,5vw,80px);align-items:center}
+.stars{display:flex;gap:4px;align-items:center;font:600 15px/1 var(--sans);color:var(--paper)}
+.stars svg{width:18px;height:18px;fill:var(--y)}
+.stars span{margin-left:8px}
+.logos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.logos img{width:100%;aspect-ratio:9/5;object-fit:contain;padding:6px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);filter:grayscale(1) invert(1) contrast(1.1);mix-blend-mode:screen;opacity:.8;transition:opacity .3s}
+.logos img:hover{opacity:1}
+.logos+small{display:block;margin-top:12px;font-size:14px;color:var(--mute)}
+.ph{margin-top:32px;max-width:440px;border:1.5px dashed var(--line-hi)}
+.ph__img{aspect-ratio:16/9;display:grid;place-items:center;text-align:center;padding:16px;color:var(--mute);font-size:15px;line-height:1.4}
+.ph__img b{display:block;color:var(--paper);font-size:16px;margin-bottom:4px}
+.ph figcaption{display:flex;justify-content:space-between;gap:12px;padding:10px 14px;border-top:1.5px dashed var(--line-hi);font:600 12px/1.3 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+
+/* cierre */
+.close{padding:clamp(80px,10vw,150px) 0;border-top:1.5px solid var(--line);position:relative;overflow:hidden}
+.close h2{font:900 clamp(3rem,7vw,6rem)/.92 var(--sans);letter-spacing:-.04em;max-width:13ch;text-wrap:balance}
+.close h2 span{color:var(--y)}
+.close p{margin-top:24px;color:var(--mute);font-size:19px;max-width:46ch}
+.close__row{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+
+footer{border-top:1.5px solid var(--paper);padding:52px 0 26px;font-size:15px;color:var(--mute)}
+.foot{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:32px}
+.foot img{height:42px;width:auto;margin-bottom:14px}
+.foot h4{font:800 15px/1 var(--sans);color:var(--y);margin-bottom:14px}
+.foot ul{list-style:none;padding:0;display:grid;gap:6px}
+.foot a{text-decoration:none}.foot a:hover{color:var(--y);text-decoration:underline}
+.legal{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13.5px}
+.fab{position:fixed;right:18px;bottom:18px;z-index:20;width:58px;height:58px;border-radius:50%;background:#1f8a3c;color:#fff;display:grid;place-items:center;box-shadow:0 10px 24px -8px rgba(0,0,0,.7);transition:transform .2s}
+.fab:hover{transform:scale(1.06)}
+.fab svg{width:30px;height:30px;fill:currentColor}
+
+@media (max-width:1100px){
+  .hero{grid-template-columns:1fr}
+  .hero h1,.hero__sub,.hero .sheet{grid-column:1}
+  .hero__sub{margin-top:20px}
+  .sheet__body{grid-template-columns:1fr}
+  .tb{border-left:0;border-top:1.5px solid var(--paper)}
+  .proc{grid-template-columns:1fr}
+  .proc__plan{top:0;z-index:2;background:var(--ground);padding:10px 0}
+  .pstep{min-height:min(44vh,420px)}
+  .foot{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  .top nav{display:none}
+  .top img{height:36px}.top .btn{padding:12px 14px;font-size:14px}
+  .head,.legend,.cover,.proof{grid-template-columns:1fr}
+  .photo{position:relative;top:0}
+  .sheet__bar{flex-direction:column;align-items:flex-start}
+  .deps{columns:2}
+  .logos{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .foot{grid-template-columns:1fr}
+  .pstep{min-height:62vh;padding:28px 0}
+  .proc__plan .sheet__bar{flex-direction:row;padding:8px 12px}
+  .proc__plan .sheet__bar>span:last-child{display:none}
+}
+@media (max-width:440px){
+  .cells2{grid-template-columns:1fr}
+  .cells2 .cell:first-child{border-right:0}
+  .legend td:nth-child(3){display:none}
+  .phases button{padding:7px 7px;font-size:11.5px}
+}
+.hint-touch{display:none}
+@media (pointer:coarse){.hint-fine{display:none}.hint-touch{display:inline}}
+@media (max-width:600px){.plan text{display:none}.plan text.lbl{display:block;font-size:22px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a href="#" aria-label="Nuova, inicio"><img src="assets/img/logo-nuova-light-1.png" alt="Nuova · Universo de góndolas" width="900" height="300"></a>
+    <nav aria-label="Secciones"><a href="#leyenda">Mobiliario</a><a href="#proceso">Proceso</a><a href="#cobertura">Cobertura</a><a href="#clientes">Clientes</a></nav>
+    <a class="btn btn--line" href="#visita">Solicitar visita técnica</a>
+  </header>
+
+  <main>
+  <section class="hero" aria-labelledby="h1">
+    <h1 id="h1">Equipamos la tienda <span>completa.</span></h1>
+    <div class="hero__sub">
+      <p>Del plano a la inauguración: <strong>diseñamos en 3D, fabricamos, despachamos e instalamos</strong> cada góndola, check-out y módulo de las tiendas de tu cadena, en cualquiera de los 24 departamentos del Perú.</p>
+    </div>
+
+    <div class="sheet grid-bg" id="heroSheet">
+      <div class="sheet__bar">
+        <span>Lámina <span class="code">A-01</span> · Planta de tienda</span>
+        <div class="phases" role="group" aria-label="Fase del proyecto">
+          <button type="button" data-p="1" aria-pressed="false">Diseño 3D</button>
+          <button type="button" data-p="2" aria-pressed="false">Fabricación</button>
+          <button type="button" data-p="3" aria-pressed="false">Instalación</button>
+        </div>
+      </div>
+      <div class="sheet__body">
+      <div class="sheet__plan">
+      <div style="position:relative" id="heroPlanBox"></div>
+      <div class="sheet__note"><span>Plano ilustrativo · medidas referenciales</span><span class="hint-fine">Pasa el cursor sobre un mueble</span><span class="hint-touch">Toca un mueble para ver su medida</span></div>
+      </div>
+      <form class="tb" id="visita" data-lead aria-labelledby="tbTitle">
+        <div class="tb__head"><h2 id="tbTitle">Solicita una visita técnica</h2><div class="mono">Lámina<b>A-02</b></div></div>
+        <div class="cell" data-campo><label for="t-emp">Empresa</label><input id="t-emp" name="empresa" required autocomplete="organization" placeholder="Nombre de la cadena"><span data-error aria-live="polite"></span></div>
+        <div class="cells2">
+          <div class="cell" data-campo><label for="t-nom">Nombre</label><input id="t-nom" name="nombre" required autocomplete="name" placeholder="Nombre y apellido"><span data-error aria-live="polite"></span></div>
+          <div class="cell" data-campo><label for="t-car">Cargo</label><input id="t-car" name="cargo" required autocomplete="organization-title" placeholder="Ej. Expansión"><span data-error aria-live="polite"></span></div>
+        </div>
+        <div class="cells2">
+          <div class="cell" data-campo><label for="t-tel">Teléfono</label><input id="t-tel" name="telefono" type="tel" required inputmode="tel" autocomplete="tel-national" placeholder="9XX XXX XXX"><span data-error aria-live="polite"></span></div>
+          <div class="cell" data-campo><label for="t-tie">Nº de tiendas</label><input id="t-tie" name="tiendas" type="number" min="1" required inputmode="numeric" placeholder="Ej. 5"><span data-error aria-live="polite"></span></div>
+        </div>
+        <div class="cells2">
+          <div class="cell" data-campo><label for="t-dep">Departamento</label><select id="t-dep" name="departamento" data-departamentos></select></div>
+          <div class="cell" data-campo><label for="t-pro">Proyecto</label><select id="t-pro" name="proyecto"><option>Tiendas nuevas</option><option>Remodelación</option><option>Roll-out de formato</option><option>Check-outs</option><option>Temporada</option></select></div>
+        </div>
+        <button class="btn" type="submit">Solicitar visita técnica <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <div class="tb__foot"><span><i class="dot" aria-hidden="true"></i><span data-estado>Asesor en línea</span></span><a href="https://wa.me/51903260296" target="_blank" rel="noopener">WhatsApp 903 260 296</a></div>
+        <p class="ok" data-ok hidden tabindex="-1">Listo: abrimos WhatsApp con tu solicitud. Envíala y coordinamos la visita técnica.</p>
+        <div class="tb__meta" aria-hidden="true"><div><b>Proyecto</b>Tu próxima apertura</div><div><b>Escala</b><span class="code">S/E</span></div><div><b>Dibujó</b>Nuova · Ate</div><div><b>Rev.</b><span class="code">00</span></div></div>
+      </form>
+      </div>
+    </div>
+
+  </section>
+  </main>
+</div>
+
+<section class="sec" id="leyenda" aria-labelledby="h-ley">
+  <div class="wrap">
+    <div class="head">
+      <div><h2 class="h2" id="h-ley">Todo lo que va en el plano, lo fabricamos nosotros</h2></div>
+      <p class="lede">Cada símbolo es una línea de producto Nuova, fabricada a medida en melamina o metal y adaptada a tu formato de tienda.</p>
+    </div>
+    <div class="legend">
+      <table>
+        <thead><tr><th class="sym">Símb.</th><th>Mueble</th><th style="text-align:right">Catálogo</th></tr></thead>
+        <tbody id="legendBody"></tbody>
+      </table>
+      <figure class="photo grid-bg"><div class="photo__img"><img id="lgImg" class="is-fit" src="assets/img/cut/gondola-metalica-de-central-con-dos-cabeceras-nuova-fabricantes-de-gondolas-estantes-cut.png" alt="Góndolas"></div><figcaption><span>Lámina <span class="code">A-04</span> · <span id="lgCap">Góndolas</span></span><span>Fabricación Nuova</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="proceso" aria-labelledby="h-proc">
+  <div class="wrap">
+    <div class="head">
+      <div><h2 class="h2" id="h-proc">Un solo responsable, del primer trazo a la apertura</h2></div>
+      <p class="lede">Tu proyecto no cambia de manos. Mira cómo avanza la misma tienda en cada etapa.</p>
+    </div>
+    <div class="proc">
+      <div class="proc__plan"><div class="sheet grid-bg"><div class="sheet__bar"><span>Lámina <span class="code">A-03</span> · <span id="procLabel">Etapa 1 · Diseño 3D</span></span><span>Planta tipo</span></div><div id="procPlanBox"></div></div></div>
+      <div class="proc__steps">
+        <article class="pstep" data-p="1"><h3>Diseño 3D</h3><p>Partimos de tu layout y de tu formato de tienda. Proponemos cada mueble y lo validas en 3D antes de producir.</p><ul><li>Visita técnica y medición</li><li>Diseño personalizado</li><li>Diseños 3D para aprobación</li></ul></article>
+        <article class="pstep" data-p="2"><h3>Fabricación a medida</h3><p>Fabricamos en nuestra planta de Ate, con materiales resistentes y acabados de calidad, con el mismo estándar para todas tus tiendas.</p><ul><li>Melamina y estructuras metálicas</li><li>Colores de tu marca</li><li>Mismo estándar en cada tienda</li></ul></article>
+        <article class="pstep" data-p="3"><h3>Instalación</h3><p>Nuestro equipo llega a la tienda y realiza un montaje seguro, listo para cargar mercadería.</p><ul><li>Envío a todo el país</li><li>Montaje profesional</li><li>Entrega del piso de venta</li></ul></article>
+        <article class="pstep" data-p="4"><h3>Soporte continuo</h3><p>Después de abrir seguimos contigo: asesoría especializada, reposición y ampliaciones para la siguiente tienda de tu cadena.</p><ul><li>Asesoría especializada</li><li>Ampliaciones y reposición</li><li>La siguiente apertura, igual</li></ul></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="cobertura" aria-labelledby="h-cob">
+  <div class="wrap cover">
+    <div><h2 class="h2" id="h-cob">Despachamos e instalamos en los 24 departamentos</h2><p class="lede" style="margin-top:20px">Fabricamos en Ate, Lima, y llevamos cada proyecto a cualquier ciudad del país con nuestro propio equipo de instalación.</p></div>
+    <table class="sched">
+      <thead><tr><th>Lámina <span class="code">A-05</span> · Cuadro de despacho</th><th class="mono">24 dptos. + Callao</th></tr></thead>
+      <tbody><tr><td colspan="2"><ul class="deps" id="deps"></ul></td></tr></tbody>
+    </table>
+  </div>
+</section>
+
+<section class="sec" id="clientes" aria-labelledby="h-cli">
+  <div class="wrap proof">
+    <div>
+      <h2 class="h2" id="h-cli">Más de 50 empresas ya equiparon sus tiendas con Nuova</h2>
+      <table class="cells">
+        <tr><th>Empresas atendidas</th><th>Reseñas en Google</th></tr>
+        <tr><td class="mono">+50</td><td><div class="stars" aria-label="5 estrellas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.6 7.2.7-5.4 4.8 1.6 7.1L12 17.6 5.6 21.2l1.6-7.1L1.8 9.3 9 8.6z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.6 7.2.7-5.4 4.8 1.6 7.1L12 17.6 5.6 21.2l1.6-7.1L1.8 9.3 9 8.6z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.6 7.2.7-5.4 4.8 1.6 7.1L12 17.6 5.6 21.2l1.6-7.1L1.8 9.3 9 8.6z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.6 7.2.7-5.4 4.8 1.6 7.1L12 17.6 5.6 21.2l1.6-7.1L1.8 9.3 9 8.6z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.6 7.2.7-5.4 4.8 1.6 7.1L12 17.6 5.6 21.2l1.6-7.1L1.8 9.3 9 8.6z"/></svg><span class="mono">5,0</span></div></td></tr>
+      </table>
+      <figure class="ph"><div class="ph__img"><span><b>Foto de proyecto pendiente</b>Aquí va una implementación real de Nuova en una cadena, cuando el cliente la entregue.</span></div><figcaption><span>Lámina <span class="code">A-06</span> · Proyecto realizado</span><span>Pendiente</span></figcaption></figure>
+    </div>
+    <div><div class="logos" id="logos"></div><small>Algunas de las empresas que ya trabajan con Nuova.</small></div>
+  </div>
+</section>
+
+<section class="close" aria-labelledby="h-close">
+  <div class="wrap">
+    <h2 id="h-close">Envíanos el plano de tu próxima <span>apertura.</span></h2>
+    <p>Lo convertimos en una propuesta con diseño 3D, fabricación e instalación para todas las tiendas del proyecto.</p>
+    <div class="close__row">
+      <a class="btn" href="#visita">Solicitar visita técnica</a>
+      <a class="btn btn--line" href="https://wa.me/51903260296?text=Hola%20Nuova%2C%20quiero%20enviarles%20el%20plano%20de%20una%20nueva%20tienda." target="_blank" rel="noopener">Enviar plano por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><img src="assets/img/logo-nuova-light-1.png" alt="Nuova · Universo de góndolas" width="900" height="300"><p>Diseñamos, fabricamos e instalamos mobiliario comercial.</p></div>
+      <div><h4>Planta</h4><p>Parcela 10900 Mza. A Lote 8,<br>Urb. Jardines La Gloria,<br>Ate, Lima 15476</p></div>
+      <div><h4>Contacto</h4><ul><li><a href="https://wa.me/51903260296" target="_blank" rel="noopener">WhatsApp 903 260 296</a></li><li><a href="tel:+51903260296">Llamar 903 260 296</a></li><li>Lun–Sáb, 8:00–18:00</li></ul></div>
+      <div><h4>Redes</h4><ul><li><a href="https://www.linkedin.com/search/results/all/?keywords=Nuova%20Per%C3%BA%20Universo%20de%20G%C3%B3ndolas" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="https://www.facebook.com/nuova.pe" target="_blank" rel="noopener">Facebook</a></li><li><a href="https://www.instagram.com/nuovaperu.universodegondolas" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.youtube.com/@nuovaperu" target="_blank" rel="noopener">YouTube</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 Nuova Perú · Universo de góndolas</span><a href="https://nuova.pe/" target="_blank" rel="noopener">nuova.pe</a></div>
+  </div>
+</footer>
+
+<a class="fab" href="https://wa.me/51903260296?text=Hola%20Nuova%2C%20quiero%20una%20propuesta%20de%20implementaci%C3%B3n%20para%20mi%20cadena." target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4C2.7 15.6 2.2 13.8 2.2 12 2.2 6.6 6.6 2.2 12 2.2S21.8 6.6 21.8 12 17.4 21.8 12 21.8zM12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.8 1 3.8 1.5 5.8 1.5 6.6 0 12-5.4 12-12S18.6 0 12 0z"/></svg>
+</a>
+
+<script src="assets/js/lead.js"></script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  // Tipos de mueble: nombre, medida referencial, foto, catálogo
+  var T={
+    gc:{n:'Góndola central',d:'1.20 × 0.90 × 1.60 m · por cuerpo',img:'assets/img/cut/gondola-metalica-de-central-con-dos-cabeceras-nuova-fabricantes-de-gondolas-estantes-cut.png',fit:1,cat:'33 productos',sub:'Metálica o de melamina, con bandejas, ganchos o forros.'},
+    cb:{n:'Cabecera',d:'1.00 × 0.45 × 1.60 m',img:'assets/img/cut/gondola-metalica-de-central-con-una-cabecera-nuova-fabricantes-de-gondolas-estantes-1-cut.png',fit:1,cat:'Incluida',sub:'El extremo del pasillo que más vende.'},
+    gp:{n:'Góndola de pared',d:'1.00 × 0.45 × 2.10 m · por cuerpo',img:'assets/img/cut/gondola-metalica-de-centrales-forro-liso-nuova-fabricantes-de-gondolas-estantes-cut.png',fit:1,cat:'Línea góndolas',sub:'Perímetro de la tienda, con forro liso, malla o ranurado.'},
+    co:{n:'Check-out',d:'1.80 × 0.80 × 0.90 m',img:'assets/img/soluciones-impulsan-3.png',cat:'6 productos',sub:'Zona de cajas con la identidad de tu marca.'},
+    md:{n:'Módulo verdulero',d:'1.20 × 1.20 × 0.95 m',img:'assets/img/modulos-de-atencion.jpg',cat:'35 productos',sub:'Módulos de exhibición, a granel, licoreros y de atención.'},
+    at:{n:'Módulo de atención',d:'2.40 × 0.60 × 1.05 m',img:'assets/img/exhibidor-base-de-melamina.jpg',cat:'Línea módulos',sub:'Counters y mostradores a medida.'},
+    em:{n:'Estructura metálica',d:'1.50 × 0.60 × 1.70 m',img:'assets/img/estrcturas-metalicas.jpg',cat:'8 productos',sub:'Exhibidores de ropa, calzado y cartulineros.'},
+    cc:{n:'Canastas y coches',d:'Zona de 3.00 × 1.50 m',img:'assets/img/canastas-y-coches.jpg',cat:'8 productos',sub:'Canastas, coches y jabas.'},
+    lk:{n:'Lockers',d:'2.80 × 0.45 × 1.80 m',img:'assets/img/exhibidor-prendas-y-calzados.jpg',cat:'Línea lockers',sub:'Guardarropa para clientes y colaboradores.'}
+  };
+  // Planta 1000 × 640
+  var F=[];
+  for(var i=0;i<8;i++)F.push(['gp',60+i*110,40,104,24]);                 // pared superior
+  for(i=0;i<4;i++)F.push(['gp',40,100+i*86,24,80]);                     // pared izquierda
+  for(i=0;i<4;i++)F.push(['gp',936,100+i*86,24,80]);                    // pared derecha
+  for(i=0;i<6;i++){var x=150+i*92;F.push(['cb',x,112,40,20]);F.push(['gc',x,134,40,230]);F.push(['cb',x,366,40,20])}
+  F.push(['md',720,120,68,68]);F.push(['md',820,120,68,68]);F.push(['md',720,220,68,68]);F.push(['md',820,220,68,68]);
+  F.push(['em',720,330,48,90]);F.push(['em',790,330,48,90]);F.push(['at',860,330,60,150]);
+  for(i=0;i<4;i++)F.push(['co',110+i*72,470,44,92]);
+  F.push(['lk',650,566,150,26]);F.push(['cc',820,520,110,62]);
+
+  function el(n,a,p){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
+  function build(id){
+    var s=el('svg',{viewBox:'0 0 1000 680',class:'plan',role:'img','aria-label':'Plano ilustrativo de una tienda equipada por Nuova','data-phase':'0'});
+    var d=el('defs',{},s),pt=el('pattern',{id:'hatch'+id,width:8,height:8,patternUnits:'userSpaceOnUse',patternTransform:'rotate(45)'},d);
+    el('rect',{width:8,height:8,fill:'rgba(255,210,7,.12)'},pt);el('line',{x1:0,y1:0,x2:0,y2:8,stroke:'#ffd207','stroke-width':2.2},pt);
+    // muros con ingreso
+    el('path',{class:'wall',d:'M420 620 H20 V20 H980 V620 H580'},s);
+    el('path',{class:'door',d:'M420 620 A80 80 0 0 1 500 540 M580 620 A80 80 0 0 0 500 540'},s);
+    // cotas
+    el('path',{class:'dim',d:'M20 652 H980 M20 644 V660 M980 644 V660'},s);
+    var t=el('text',{x:500,y:672,'text-anchor':'middle',class:'mono'},s);t.textContent='24.00 m';
+    var t2=el('text',{x:500,y:604,'text-anchor':'middle',class:'lbl'},s);t2.textContent='INGRESO';
+    el('rect',{class:'zone',x:96,y:452,width:300,height:126},s);
+    var t3=el('text',{x:100,y:446},s);t3.textContent='ZONA DE CAJAS';
+    var t4=el('text',{x:150,y:98},s);t4.textContent='PASILLOS CENTRALES';
+    var t5=el('text',{x:720,y:110},s);t5.textContent='PERECIBLES';
+    F.forEach(function(f,i){
+      var g=el('g',{class:'fx',tabindex:0,'data-t':f[0],role:'button','aria-label':T[f[0]].n+', '+T[f[0]].d},s);
+      g.style.setProperty('--i',i);
+      el('rect',{x:f[1],y:f[2],width:f[3],height:f[4],rx:1.5},g);
+    });
+    // etapa 4: visitas de soporte sobre la tienda ya equipada
+    var sv=el('g',{class:'truck svc','aria-hidden':'true'},s);
+    [[170,250],[354,250],[754,154],[884,404],[198,516],[725,579]].forEach(function(c){
+      el('circle',{cx:c[0],cy:c[1],r:15},sv);el('path',{d:'M'+(c[0]-6)+' '+c[1]+' l4 4 8-8'},sv);
+    });
+    var t6=el('text',{x:560,y:470,'text-anchor':'middle'},sv);t6.textContent='SOPORTE · REPOSICIÓN';
+    var t7=el('text',{x:560,y:492,'text-anchor':'middle'},sv);t7.textContent='SIGUIENTE APERTURA, IGUAL';
+    s.querySelectorAll('.fx rect').forEach(function(r){r.style.setProperty('--hatch','url(#hatch'+id+')')});
+    return s;
+  }
+  // el relleno rayado usa el patrón de cada SVG
+  var st=document.createElement('style');st.textContent='.plan[data-phase="2"] .fx rect{fill:var(--hatch)!important}';document.head.appendChild(st);
+
+  var heroBox=document.getElementById('heroPlanBox'),hero=build('h');heroBox.appendChild(hero);
+  var tip=document.createElement('div');tip.className='tip';tip.setAttribute('aria-hidden','true');heroBox.appendChild(tip);
+  function focusType(svg,tp,on){
+    svg.classList.toggle('is-focus',on);
+    svg.querySelectorAll('.fx').forEach(function(g){g.classList.toggle('is-on',on&&g.dataset.t===tp)});
+  }
+  function showTip(g){
+    var b=g.getBBox(),sv=hero.getBoundingClientRect(),k=sv.width/1000,T0=T[g.dataset.t];
+    tip.innerHTML='<b>'+T0.n+'</b><span>'+T0.d+' · ref.</span>';
+    tip.style.left=((b.x+b.width/2)*k)+'px';tip.style.top=(b.y*k)+'px';tip.classList.add('is-on');
+    focusType(hero,g.dataset.t,true);
+  }
+  function hideTip(){tip.classList.remove('is-on');focusType(hero,null,false)}
+  hero.querySelectorAll('.fx').forEach(function(g){
+    g.addEventListener('mouseenter',function(){showTip(g)});g.addEventListener('mouseleave',hideTip);
+    g.addEventListener('focus',function(){showTip(g)});g.addEventListener('blur',hideTip);
+    g.addEventListener('click',function(){pick(g.dataset.t);document.getElementById('leyenda').scrollIntoView({behavior:'smooth'})});
+  });
+
+  // fases del hero: se reproducen una vez y luego quedan a mano
+  var pbtn=document.querySelectorAll('.phases button');
+  function setPhase(p){hero.setAttribute('data-phase',p);pbtn.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.p==p?'true':'false')})}
+  pbtn.forEach(function(b){b.addEventListener('click',function(){clearTimeout(auto);setPhase(b.dataset.p)})});
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,auto;
+  if(reduce)setPhase(3);else{setPhase(1);auto=setTimeout(function(){setPhase(2);auto=setTimeout(function(){setPhase(3)},1500)},1500)}
+
+  // leyenda
+  var body=document.getElementById('legendBody'),img=document.getElementById('lgImg'),cap=document.getElementById('lgCap');
+  var ORDER=['gc','cb','gp','co','md','at','em','cc','lk'];
+  function pick(tp){
+    var T0=T[tp];
+    body.querySelectorAll('tr').forEach(function(r){r.classList.toggle('is-on',r.dataset.t===tp)});
+    img.classList.add('is-swap');
+    setTimeout(function(){img.src=T0.img;img.alt=T0.n;img.classList.toggle('is-fit',!!T0.fit);img.classList.remove('is-swap')},160);
+    cap.textContent=T0.n;
+  }
+  ORDER.forEach(function(tp){
+    var T0=T[tp],tr=document.createElement('tr');tr.className='row';tr.dataset.t=tp;tr.tabIndex=0;
+    var w=tp==='gc'?14:tp==='co'?14:tp==='md'?24:40,h=tp==='gc'||tp==='co'?28:tp==='md'?24:12;
+    tr.innerHTML='<td class="sym"><div><svg viewBox="0 0 40 28" aria-hidden="true"><rect x="'+((40-w)/2)+'" y="'+((28-h)/2)+'" width="'+w+'" height="'+h+'"/></svg></div></td><td><div>'+T0.n+'<small>'+T0.sub+'</small></div></td><td><div>'+T0.cat+'</div></td>';
+    tr.addEventListener('mouseenter',function(){pick(tp)});tr.addEventListener('click',function(){pick(tp)});tr.addEventListener('focus',function(){pick(tp)});
+    body.appendChild(tr);
+  });
+  pick('gc');
+
+  // proceso: el plano se equipa etapa por etapa
+  var procBox=document.getElementById('procPlanBox'),proc=build('p');procBox.appendChild(proc);
+  var lab=document.getElementById('procLabel'),NAMES={1:'Diseño 3D',2:'Fabricación',3:'Instalación',4:'Soporte continuo'};
+  var steps=document.querySelectorAll('.pstep');
+  proc.setAttribute('data-phase',1);steps[0].classList.add('is-on');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){
+      var p=e.target.dataset.p;steps.forEach(function(s){s.classList.toggle('is-on',s===e.target)});
+      proc.setAttribute('data-phase',p);lab.textContent='Etapa '+p+' · '+NAMES[p];
+    }})},{rootMargin:'-45% 0px -45% 0px'});
+    steps.forEach(function(s){io.observe(s)});
+  }
+
+  // cobertura
+  var deps=document.getElementById('deps');
+  Array.prototype.forEach.call(document.querySelector('#t-dep').options,function(o){
+    var li=document.createElement('li');if(o.value==='Lima')li.className='hq';
+    li.innerHTML='<span>'+o.value+'</span><span>'+(o.value==='Lima'?'planta':'envío')+'</span>';deps.appendChild(li);
+  });
+
+  var lg=document.getElementById('logos');
+  [[2,'Market Súper León'],[8,'Antonella Market'],[24,'Mister Market'],[21,'Mini Market Peñita'],[16,'Toky Asian Food Market'],[18,'Carrasco Tienda Minorista'],[25,'Inversiones Proat Perú, ferretería'],[5,'Segurindustrias Sabaoth'],[13,'Temaho Perú'],[14,'Nena Importaciones'],[10,'Panadería El Buen Pan'],[6,'Patitas & Bigotes Vet']].forEach(function(c){var n=c[0],i=document.createElement('img');i.src='assets/clientes/logo-'+n+'.png';i.alt=c[1];i.loading='lazy';i.width=360;i.height=200;lg.appendChild(i)});
+})();
+</script>
+</body>
+</html>

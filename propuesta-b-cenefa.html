@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="es-PE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nuova · Góndolas e implementación para cadenas retail</title>
+<meta name="description" content="Góndolas, check-outs y módulos fabricados a medida e instalados por Nuova para cadenas retail en todo el Perú.">
+<link rel="icon" href="assets/img/cropped-icono-nuova-2-192x192.png">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+:root{
+  --steel:#f1f1ee;
+  --steel-2:#e4e4df;
+  --upright:#d3d4cf;
+  --ink:#1e1e1c;
+  --ink-2:#4a4a45;
+  --y:#ffd207;
+  --y-deep:#e9bd00;
+  --err:#b3150a;
+  --cond:'Barlow Condensed',Arial Narrow,sans-serif;
+  --sans:'Barlow',system-ui,sans-serif;
+  --gut:clamp(16px,3.5vw,48px);
+  --max:1360px;
+  --post:clamp(18px,2.4vw,34px);
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scrollbar-color:var(--ink) var(--steel-2);accent-color:var(--ink)}
+body{font-family:var(--sans);font-size:17px;line-height:1.5;color:var(--ink);background:var(--steel);caret-color:var(--ink);-webkit-font-smoothing:antialiased}
+::selection{background:var(--y);color:var(--ink)}
+::-webkit-scrollbar{width:12px}::-webkit-scrollbar-track{background:var(--steel-2)}::-webkit-scrollbar-thumb{background:var(--ink);border:3px solid var(--steel-2);border-radius:6px}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+a{color:inherit;text-underline-offset:.2em}
+img{display:block;max-width:100%}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+
+/* parante perforado: patrón en unidades completas */
+.post{width:var(--post);flex:none;background-color:var(--upright);box-shadow:inset 2px 0 0 #bdbeb8,inset -2px 0 0 #bdbeb8;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='25' preserveAspectRatio='none'%3E%3Crect x='9' y='6' width='4' height='13' rx='1' fill='%232b2b28'/%3E%3Crect x='21' y='6' width='4' height='13' rx='1' fill='%232b2b28'/%3E%3C/svg%3E");
+  background-size:100% 25px;background-repeat:repeat-y;background-repeat:round}
+
+/* cenefa: el filo amarillo del anaquel */
+.cenefa{position:relative;background:var(--y);color:var(--ink);box-shadow:0 -3px 0 var(--y-deep) inset,0 10px 18px -12px rgba(30,30,28,.5)}
+.cenefa::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:linear-gradient(rgba(255,255,255,.55),transparent)}
+
+/* hablador */
+.tag{position:relative;background:var(--y);color:var(--ink);padding:26px 26px 22px;box-shadow:0 18px 28px -16px rgba(30,30,28,.55),0 2px 0 var(--y-deep);transform-origin:50% -14px;transform:rotate(var(--r,0deg))}
+.tag::before{ /* clip */
+  content:"";position:absolute;left:50%;top:-18px;width:34px;height:24px;margin-left:-17px;border-radius:4px 4px 2px 2px;
+  background:linear-gradient(180deg,#3a3a36,#1e1e1c);box-shadow:0 2px 0 rgba(255,255,255,.25) inset}
+.tag--ink{background:var(--ink);color:var(--steel);box-shadow:0 18px 28px -16px rgba(30,30,28,.6),0 2px 0 #000}
+.tag--ink::before{background:linear-gradient(180deg,#bbb,#8a8a85)}
+.tag--steel{background:#fff;color:var(--ink);box-shadow:0 18px 28px -16px rgba(0,0,0,.7),0 2px 0 #c9c9c2}
+@keyframes swing{0%{transform:rotate(calc(var(--r,0deg) - 5deg))}35%{transform:rotate(calc(var(--r,0deg) + 3deg))}60%{transform:rotate(calc(var(--r,0deg) - 1.5deg))}80%{transform:rotate(calc(var(--r,0deg) + .6deg))}100%{transform:rotate(var(--r,0deg))}}
+.tag:hover{animation:swing 1.1s cubic-bezier(.3,.7,.4,1)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;cursor:pointer;text-decoration:none;
+  font:800 19px/1 var(--cond);letter-spacing:.04em;text-transform:uppercase;padding:15px 24px;border:0;border-radius:3px;background:var(--ink);color:var(--y);
+  transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .2s,background .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 18px -10px rgba(0,0,0,.7)}
+.btn:active{transform:none;box-shadow:none}
+.btn:disabled{opacity:.6;cursor:progress;transform:none}
+.btn--y{background:var(--y);color:var(--ink)}
+.btn--line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+.btn--line:hover{background:var(--ink);color:var(--y)}
+svg.ico{width:1.1em;height:1.1em;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* header */
+.top{background:#fff;border-bottom:1px solid var(--steel-2)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;height:78px}
+.top img{height:44px;width:auto}
+.top nav{display:flex;gap:30px;font:600 18px/1 var(--cond);letter-spacing:.04em;text-transform:uppercase}
+.top nav a{text-decoration:none;padding:8px 0;background:linear-gradient(var(--y),var(--y)) 0 100%/0 4px no-repeat;transition:background-size .3s cubic-bezier(.16,1,.3,1)}
+.top nav a:hover{background-size:100% 4px}
+
+/* hero: una bahía de góndola */
+.bay{display:flex;max-width:var(--max);margin:clamp(18px,3vw,36px) auto 0;padding:0 var(--gut)}
+.bay__in{flex:1;min-width:0;display:flex;flex-direction:column;background:#fff}
+.bay__top{height:16px}
+.bay__scene{position:relative;min-height:clamp(500px,64vh,640px);background:#d9d9d4 url(assets/img/soluciones-impulsan-2.png) 70% 60%/cover no-repeat}
+.bay__copy{position:relative;z-index:1;padding:12px clamp(20px,4vw,56px) 40px;max-width:720px}
+.bay__copy .tag{display:inline-block;--r:-1.2deg;animation:swing 1.6s cubic-bezier(.3,.7,.4,1) .3s both}
+.bay__copy h1{font:900 clamp(3rem,6.6vw,5.6rem)/.9 var(--cond);text-transform:uppercase;letter-spacing:-.01em;max-width:12ch;text-wrap:balance}
+.bay__copy .tag small{display:flex;justify-content:space-between;gap:16px;margin-top:16px;padding-top:12px;border-top:2px solid var(--ink);font:700 15px/1.2 var(--cond);letter-spacing:.06em;text-transform:uppercase}
+.bay__copy p{background:rgba(30,30,28,.9);color:#e9e9e4;font-size:clamp(17px,1.4vw,19px);max-width:44ch;margin-top:26px;padding:16px 20px;border-radius:2px}
+.bay__copy p strong{color:#fff}
+.bay__caption{position:absolute;right:16px;bottom:14px;z-index:1;font:600 13px/1 var(--cond);letter-spacing:.08em;text-transform:uppercase;color:#fff;background:rgba(28,28,26,.7);padding:7px 10px;border-radius:2px}
+
+/* cenefa-formulario */
+.qform{padding:18px clamp(16px,2.4vw,28px) 20px}
+.qform__grid{display:grid;grid-template-columns:1.2fr 1fr .9fr .7fr 1.2fr auto;gap:12px;align-items:end}
+.qf label{display:block;font:700 13px/1 var(--cond);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.qf input,.qf select{width:100%;height:50px;border:2px solid var(--ink);border-radius:3px;background:#fff;font:600 17px var(--sans);color:var(--ink);padding:0 12px;appearance:none;-webkit-appearance:none}
+.qf select{background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%231e1e1c' stroke-width='2.4'/%3E%3C/svg%3E") right 12px center no-repeat;padding-right:32px;cursor:pointer}
+.qf input::placeholder{color:#6a6a63}
+.qf input:focus,.qf select:focus{outline:none;box-shadow:0 0 0 3px var(--ink)}
+.qf [aria-invalid=true]{border-color:var(--err);box-shadow:0 0 0 2px var(--err)}
+.qf [data-error]{display:block;font:600 13.5px/1.25 var(--sans);color:var(--err);margin-top:5px;background:#fff;padding:2px 6px;border-radius:2px}
+.qf [data-error]:empty{display:none}
+.qform .btn{height:50px}
+.qform__meta{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;margin-top:14px;font:600 16px/1.2 var(--cond);letter-spacing:.03em}
+.qform__meta a{font-weight:800}
+.dot{width:9px;height:9px;border-radius:50%;background:#16772f;display:inline-block;margin-right:8px}
+body.is-off .dot{background:#77776f;animation:none}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(22,119,47,.6)}70%{box-shadow:0 0 0 8px rgba(22,119,47,0)}100%{box-shadow:0 0 0 0 rgba(22,119,47,0)}}
+.ok{margin-top:12px;background:var(--ink);color:var(--y);padding:12px 16px;font-weight:600;border-radius:3px}
+.ok:focus{outline:none}
+.bay__base{height:26px;background:linear-gradient(#cfd0cb,#b9bab4)}
+
+/* secciones */
+.sec{padding:clamp(72px,9vw,128px) 0}
+.h2{font:900 clamp(2.6rem,5vw,4.4rem)/.92 var(--cond);text-transform:uppercase;letter-spacing:-.005em;max-width:15ch;text-wrap:balance}
+.lede{font-size:19px;color:var(--ink-2);max-width:48ch}
+.head{position:relative;margin-bottom:clamp(40px,5vw,64px);padding-bottom:22px}
+.head::after{content:"";position:absolute;left:0;right:0;bottom:0;height:12px;background:var(--y);box-shadow:0 -3px 0 var(--y-deep) inset,0 10px 18px -12px rgba(30,30,28,.5)}
+.head .lede{margin-top:18px}
+#proceso .head{padding-bottom:0}
+#proceso .head::after{display:none}
+
+/* anaquel de líneas */
+.shelf{display:flex}
+.shelf__in{flex:1;min-width:0;background:#fff}
+.display{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:center;min-height:440px}
+.display__img{height:100%;display:grid;place-items:center;padding:28px;background:#fff}
+.display__img img{max-height:400px;width:auto;object-fit:contain;transition:opacity .3s,transform .5s cubic-bezier(.16,1,.3,1)}
+.display__img img.is-photo{max-height:none;width:100%;height:400px;object-fit:cover;border-radius:2px}
+.display__img img.is-swap{opacity:0;transform:translateY(8px)}
+.display__txt{padding:36px clamp(24px,3vw,48px)}
+.display__txt h3{font:900 clamp(2.4rem,4vw,3.6rem)/.9 var(--cond);text-transform:uppercase}
+.display__txt .count{display:inline-block;margin-top:14px;font:800 18px/1 var(--cond);letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:var(--y);padding:8px 12px;border-radius:2px;font-variant-numeric:tabular-nums}
+.display__txt p{margin-top:18px;color:var(--ink-2);max-width:42ch}
+.display__txt ul{margin-top:18px;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.display__txt li{font:600 15px/1 var(--cond);letter-spacing:.05em;text-transform:uppercase;border:1.5px solid var(--ink);padding:7px 10px;border-radius:2px}
+.rail{padding:14px 18px 30px}
+.rail [role=tablist]{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.ptag{all:unset;box-sizing:border-box;cursor:pointer;position:relative;background:#fff;color:var(--ink);border-radius:2px;padding:14px 14px 12px;
+  box-shadow:0 2px 0 rgba(0,0,0,.08),0 10px 16px -12px rgba(0,0,0,.5);transform-origin:50% -10px;transition:background .2s,color .2s,opacity .25s}
+.ptag::before{content:"";position:absolute;left:50%;top:-12px;width:24px;height:16px;margin-left:-12px;background:#2b2b28;border-radius:3px 3px 1px 1px}
+.ptag b{display:block;font:900 22px/1 var(--cond);text-transform:uppercase}
+.ptag small{display:block;margin-top:8px;font:700 13px/1 var(--cond);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.ptag:hover{animation:swing .9s cubic-bezier(.3,.7,.4,1)}
+.ptag[aria-selected=true]{background:var(--ink);color:var(--y)}
+.ptag[aria-selected=true] small{color:#cfcfc8}
+.ptag:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.rail:hover .ptag[aria-selected=false]{opacity:.6}
+.rail:hover .ptag:hover{opacity:1}
+
+/* proceso: 4 etiquetas de anaquel */
+.steps{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2vw,28px);padding:34px 12px 0}
+.steps::before{content:"";position:absolute;left:0;right:0;top:0;height:22px;background:var(--y);box-shadow:0 -3px 0 var(--y-deep) inset,0 10px 18px -12px rgba(30,30,28,.5);border-radius:1px}
+.step{background:#fff;padding:24px 22px 24px}
+.step:nth-child(even){--r:.8deg}
+.step:nth-child(odd){--r:-.6deg}
+.step .n{display:block;font:900 64px/.85 var(--cond);font-variant-numeric:tabular-nums}
+.step h3{font:900 28px/1 var(--cond);text-transform:uppercase;margin:16px 0 10px;padding-top:12px;border-top:2px solid var(--ink)}
+.step p{color:var(--ink-2);font-size:16px}
+
+/* por qué: habladores colgados */
+.why{background:var(--ink);color:var(--steel)}
+.why .h2{color:#fff}
+.why .lede{color:#c9c9c2}
+.why__rack{position:relative;padding-top:24px}
+.why__rack::before{content:"";position:absolute;left:0;right:0;top:0;height:14px;background:linear-gradient(#5b5b55,#3a3a36);border-radius:2px}
+.why__tags{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) minmax(0,1fr);gap:clamp(18px,3vw,40px);align-items:start}
+.why__tags .tag{padding:30px 28px 28px}
+.why__tags .tag:nth-child(1){--r:-1deg}
+.why__tags .tag:nth-child(2){--r:.6deg}
+.why__tags .tag:nth-child(3){--r:1.6deg}
+.why__tags .big{font:900 clamp(5rem,9vw,7.6rem)/.8 var(--cond);font-variant-numeric:tabular-nums;display:flex;align-items:flex-start;gap:6px}
+.why__tags .big sup{font-size:.3em;line-height:1;margin-top:.25em;text-transform:uppercase;letter-spacing:.02em}
+.why__tags .word{font:900 clamp(2.4rem,3.4vw,3.2rem)/.9 var(--cond);text-transform:uppercase}
+.why__tags h3{font:800 24px/1.05 var(--cond);text-transform:uppercase;margin-top:14px;padding-top:12px;border-top:2px solid currentColor}
+.why__tags p{margin-top:10px;font-size:16px}
+
+/* galería en bahías */
+.gal{display:grid;grid-template-columns:var(--post) 1.3fr var(--post) 1fr var(--post) 1fr var(--post);align-items:stretch;background:#fff}
+.gal .post{width:auto}
+.gal figure{margin:0;display:flex;flex-direction:column}
+.gal img{width:100%;height:clamp(240px,26vw,360px);object-fit:cover}
+.gal figcaption{padding:12px 14px;font:700 15px/1.1 var(--cond);letter-spacing:.05em;text-transform:uppercase;border-top:6px solid var(--y)}
+
+/* prueba */
+.proof{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,5vw,80px);align-items:center}
+.proof .tag{display:inline-block;padding:24px 28px}
+.proof .tag b{display:block;font:900 clamp(5rem,10vw,8rem)/.8 var(--cond)}
+.proof .tag span{display:block;font:700 20px/1.1 var(--cond);text-transform:uppercase;margin-top:10px;max-width:16ch}
+.stars{display:flex;gap:4px;align-items:center;margin-top:26px;font:700 17px/1 var(--cond);letter-spacing:.04em;text-transform:uppercase}
+.stars svg{width:20px;height:20px;fill:var(--y-deep)}
+.stars span{margin-left:8px}
+.logos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:#d7d7d1;border:1px solid #d7d7d1}
+.logos img{background:#fff;aspect-ratio:9/5;object-fit:contain;filter:grayscale(1);opacity:.85;transition:filter .3s,opacity .3s}
+.logos img:hover{filter:none;opacity:1}
+.logos+small{display:block;margin-top:10px;color:var(--ink-2);font-size:14px}
+
+/* cierre */
+.close{padding:clamp(56px,7vw,96px) 0 0}
+.close__card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);background:#fff}
+.close__l{padding:clamp(28px,4vw,56px)}
+.close__l h2{font:900 clamp(2.8rem,5.4vw,4.8rem)/.9 var(--cond);text-transform:uppercase;max-width:12ch}
+.close__l p{margin-top:20px;color:var(--ink-2);max-width:40ch}
+.close__l ul{margin-top:26px;padding:0;list-style:none;display:grid;gap:10px;font-weight:600}
+.close__l li{display:flex;gap:10px;align-items:center}
+.close__r{padding:clamp(24px,3.4vw,44px)}
+.close__r .qf{margin-bottom:14px}
+.close__r .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.close__r .btn{width:100%;height:56px;font-size:21px;margin-top:6px}
+.close__r .qform__meta{margin-top:16px}
+
+footer{background:var(--ink);color:#cfcfc8;padding:56px 0 26px;font-size:15.5px;margin-top:0}
+.foot{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:32px}
+.foot img{height:44px;width:auto;margin-bottom:14px}
+.foot h4{font:800 19px/1 var(--cond);letter-spacing:.06em;text-transform:uppercase;color:var(--y);margin-bottom:12px}
+.foot ul{list-style:none;padding:0;display:grid;gap:6px}
+.foot a{text-decoration:none}.foot a:hover{color:var(--y);text-decoration:underline}
+.legal{border-top:1px solid #3d3d39;margin-top:40px;padding-top:18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px;color:#9a9a92}
+.fab{position:fixed;right:18px;bottom:18px;z-index:20;width:58px;height:58px;border-radius:50%;background:#16772f;color:#fff;display:grid;place-items:center;box-shadow:0 10px 24px -8px rgba(0,0,0,.55);transition:transform .2s}
+.fab:hover{transform:scale(1.06)}
+.fab svg{width:30px;height:30px;fill:currentColor}
+
+@media (max-width:1180px){
+  .qform__grid{grid-template-columns:1fr 1fr 1fr}
+  .qform__grid .btn{grid-column:span 3}
+  .rail [role=tablist]{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:26px}
+  .steps{grid-template-columns:1fr 1fr;row-gap:44px}
+  .foot{grid-template-columns:1fr 1fr}
+}
+@media (max-width:820px){
+  .top nav{display:none}
+  .top .wrap{height:66px}.top img{height:36px}.top .btn{padding:11px 14px;font-size:16px}
+  .bay{padding:0 8px;--post:12px}
+  .bay__scene{min-height:0;background-position:72% 50%}
+  .bay__copy{padding:10px 14px 22px}
+  .bay__copy h1{font-size:clamp(2.4rem,11vw,3.2rem)}
+  .bay__copy .tag{padding:22px 18px 16px}
+  .bay__copy p{font-size:16px;margin-top:16px;padding:12px 14px}
+  .bay__caption{position:relative;right:auto;bottom:auto;display:block;width:max-content;margin:-8px 14px 14px;font-size:11px}
+  .head .lede{font-size:17px}
+  .head,.display,.proof,.close__card{grid-template-columns:1fr}
+  .display__img img.is-photo{height:280px}
+  .display__img img{max-height:300px}
+  .why__tags{grid-template-columns:1fr;row-gap:44px}
+  .why__tags .tag{--r:0deg}
+  .gal{grid-template-columns:1fr;gap:0}
+  .gal .post{display:none}
+  .gal img{height:240px}
+}
+@media (max-width:560px){
+  .qform__grid{grid-template-columns:1fr 1fr}
+  .qform__grid .qf:first-child,.qform__grid .qf:nth-child(5){grid-column:span 2}
+  .qform__grid .btn{grid-column:span 2}
+  .rail [role=tablist]{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .steps{grid-template-columns:1fr}
+  .step{--r:0deg}
+  .close__r .row{grid-template-columns:1fr}
+  .logos{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .foot{grid-template-columns:1fr}
+  .shelf .post{display:none}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a href="#" aria-label="Nuova, inicio"><img src="nuova-logo-black.png" alt="Nuova · Universo de góndolas" width="2041" height="729"></a>
+    <nav aria-label="Secciones"><a href="#lineas">Líneas</a><a href="#proceso">Proceso</a><a href="#cadenas">Para cadenas</a><a href="#cotizar">Cotizar</a></nav>
+    <a class="btn" href="#cotizar">Cotizar proyecto</a>
+  </div>
+</header>
+
+<main>
+<section class="bay" aria-labelledby="h1">
+  <div class="post" aria-hidden="true"></div>
+  <div class="bay__in">
+    <div class="bay__top cenefa" aria-hidden="true"></div>
+    <div class="bay__scene">
+      <div class="bay__copy">
+        <div class="tag">
+          <h1 id="h1">Equipamos tus tiendas, pasillo por pasillo</h1>
+          <small><span>Góndolas · Check-outs · Módulos</span><span>Hecho en Perú</span></small>
+        </div>
+        <p>Nuova diseña en 3D, fabrica a medida e instala el mobiliario comercial de <strong>cadenas que abren o remodelan tiendas en los 24 departamentos del Perú</strong>. Un solo proveedor para todo el piso de venta.</p>
+      </div>
+      <span class="bay__caption">Góndolas metálicas Nuova instaladas</span>
+    </div>
+    <form class="cenefa qform" id="cotizar-rapido" data-lead aria-label="Cotización rápida">
+      <div class="qform__grid">
+        <div class="qf" data-campo><label for="q-emp">Empresa</label><input id="q-emp" name="empresa" required autocomplete="organization" placeholder="Nombre de la cadena"><span data-error aria-live="polite"></span></div>
+        <div class="qf" data-campo><label for="q-nom">Nombre</label><input id="q-nom" name="nombre" required autocomplete="name" placeholder="Tu nombre"><span data-error aria-live="polite"></span></div>
+        <div class="qf" data-campo><label for="q-tel">Teléfono</label><input id="q-tel" name="telefono" type="tel" required inputmode="tel" autocomplete="tel-national" placeholder="9XX XXX XXX"><span data-error aria-live="polite"></span></div>
+        <div class="qf" data-campo><label for="q-tie">Tiendas</label><input id="q-tie" name="tiendas" type="number" min="1" required inputmode="numeric" placeholder="Ej. 8"><span data-error aria-live="polite"></span></div>
+        <div class="qf" data-campo><label for="q-pro">Proyecto</label>
+          <select id="q-pro" name="proyecto"><option>Tiendas nuevas</option><option>Remodelación</option><option>Roll-out de formato</option><option>Check-outs y cajas</option><option>Exhibición de temporada</option></select></div>
+        <button class="btn" type="submit">Cotizar <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+      <div class="qform__meta"><span><i class="dot" aria-hidden="true"></i><span data-estado>Asesor en línea</span></span><a href="https://wa.me/51903260296" target="_blank" rel="noopener">o escríbenos por WhatsApp: 903 260 296</a></div>
+      <p class="ok" data-ok hidden tabindex="-1">Listo: abrimos WhatsApp con tu solicitud. Envíala y un asesor corporativo te contactará.</p>
+    </form>
+    <div class="bay__base" aria-hidden="true"></div>
+  </div>
+  <div class="post" aria-hidden="true"></div>
+</section>
+
+<section class="sec" id="lineas" aria-labelledby="h-lineas">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="h2" id="h-lineas">Todo el piso de venta, en un solo anaquel</h2>
+      <p class="lede">Elige una línea para ver qué fabricamos. Cada pieza se adapta a las medidas, colores y planograma de tu formato.</p>
+    </div>
+    <div class="shelf">
+      <div class="post" aria-hidden="true"></div>
+      <div class="shelf__in">
+        <div class="display" role="tabpanel" id="panel" aria-live="polite">
+          <div class="display__img"><img id="pImg" src="assets/img/gondola-metalica-de-central-con-dos-cabeceras-nuova-fabricantes-de-gondolas-estantes.png" alt="Góndolas"></div>
+          <div class="display__txt"><h3 id="pName">Góndolas</h3><span class="count" id="pCount">33 productos</span><p id="pDesc"></p><ul id="pTags"></ul></div>
+        </div>
+        <div class="rail cenefa"><div role="tablist" aria-label="Líneas de producto" id="rail"></div></div>
+      </div>
+      <div class="post" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="proceso" aria-labelledby="h-proc" style="padding-top:0">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="h2" id="h-proc">Del plano al pasillo, sin cambiar de proveedor</h2>
+      <p class="lede">El mismo equipo acompaña tu proyecto de principio a fin. Menos coordinación, menos riesgo de plazo en cada apertura.</p>
+    </div>
+    <div class="steps">
+      <div class="step tag"><span class="n">1</span><h3>Diseño 3D</h3><p>Trabajamos sobre tu layout y te mostramos cada mueble en 3D antes de fabricar.</p></div>
+      <div class="step tag"><span class="n">2</span><h3>Fabricación</h3><p>Melamina y metal fabricados a medida, con materiales resistentes y acabados de calidad.</p></div>
+      <div class="step tag"><span class="n">3</span><h3>Envío nacional</h3><p>Llegamos a cualquier ciudad del país, en los 24 departamentos.</p></div>
+      <div class="step tag"><span class="n">4</span><h3>Instalación</h3><p>Montaje seguro por nuestro equipo y soporte continuo después de abrir.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec why" id="cadenas" aria-labelledby="h-why">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="h2" id="h-why">Pensado para cadenas, no para una sola tienda</h2>
+      <p class="lede">Cuando abres en serie, lo que importa es que cada local quede igual, a tiempo y con un solo responsable.</p>
+    </div>
+    <div class="why__rack">
+      <div class="why__tags">
+        <div class="tag"><div class="big">24<sup>dptos.</sup></div><h3>Envío a todo el país</h3><p>Fabricamos en Ate, Lima, enviamos a los 24 departamentos y nuestro equipo realiza la instalación profesional.</p></div>
+        <div class="tag tag--steel"><div class="word">Un solo responsable</div><h3>Del diseño a la instalación</h3><p>Un mismo equipo diseña, fabrica, envía e instala. Sin cruces entre proveedores en cada apertura.</p></div>
+        <div class="tag"><div class="word">3D antes de fabricar</div><h3>Tu formato, validado</h3><p>Apruebas cada góndola y módulo en 3D, con tus medidas, colores y planograma, antes de producir.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-label="Proyectos Nuova" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="gal">
+      <div class="post" aria-hidden="true"></div>
+      <figure><img src="assets/img/banner-3.jpg" alt="Módulo licorero de melamina en un minimarket" style="object-position:100% 50%" loading="lazy"><figcaption>Diseño 3D · módulo licorero</figcaption></figure>
+      <div class="post" aria-hidden="true"></div>
+      <figure><img src="assets/img/prueba-imagen-banner.jpg" alt="Ferretería con estanterías amarillas, panel de herramientas y mostrador" style="object-position:100% 50%" loading="lazy"><figcaption>Diseño 3D · ferretería</figcaption></figure>
+      <div class="post" aria-hidden="true"></div>
+      <figure><img src="assets/img/banner-2.jpg" alt="Tienda de tecnología con góndolas metálicas azules" style="object-position:100% 50%" loading="lazy"><figcaption>Diseño 3D · tecnología</figcaption></figure>
+      <div class="post" aria-hidden="true"></div>
+    </div>
+    <div class="cenefa" style="height:16px" aria-hidden="true"></div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="h-proof">
+  <div class="wrap proof">
+    <div>
+      <div class="tag"><b id="h-proof">+50</b><span>empresas ya equiparon sus tiendas con Nuova</span></div>
+      <div class="stars" aria-label="Reseñas de 5 estrellas en Google">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.6 7.2.7-5.4 4.8 1.6 7.1L12 17.6 5.6 21.2l1.6-7.1L1.8 9.3 9 8.6z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.6 7.2.7-5.4 4.8 1.6 7.1L12 17.6 5.6 21.2l1.6-7.1L1.8 9.3 9 8.6z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.6 7.2.7-5.4 4.8 1.6 7.1L12 17.6 5.6 21.2l1.6-7.1L1.8 9.3 9 8.6z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.6 7.2.7-5.4 4.8 1.6 7.1L12 17.6 5.6 21.2l1.6-7.1L1.8 9.3 9 8.6z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.6 7.2.7-5.4 4.8 1.6 7.1L12 17.6 5.6 21.2l1.6-7.1L1.8 9.3 9 8.6z"/></svg>
+        <span>Reseñas 5 estrellas en Google</span>
+      </div>
+    </div>
+    <div><div class="logos" id="logos"></div><small>Algunas de las empresas que ya trabajan con Nuova.</small></div>
+  </div>
+</section>
+
+<section class="close" id="cotizar" aria-labelledby="h-close">
+  <div class="wrap">
+    <div class="cenefa" style="height:16px" aria-hidden="true"></div>
+    <div class="close__card">
+      <div class="close__l">
+        <h2 id="h-close">Cotiza la implementación de tu cadena</h2>
+        <p>Cuéntanos cuántas tiendas, dónde y para cuándo. Te respondemos con una propuesta de diseño, fabricación e instalación.</p>
+        <ul>
+          <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Atención de lunes a sábado, de 8:00 a 18:00</li>
+          <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Visita técnica y diseño 3D de tu formato</li>
+          <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Planta propia en Ate, Lima</li>
+        </ul>
+      </div>
+      <form class="close__r cenefa" data-lead aria-label="Solicitud de cotización corporativa">
+        <div class="row">
+          <div class="qf" data-campo><label for="c-emp">Empresa</label><input id="c-emp" name="empresa" required autocomplete="organization" placeholder="Nombre de la cadena"><span data-error aria-live="polite"></span></div>
+          <div class="qf" data-campo><label for="c-car">Cargo</label><input id="c-car" name="cargo" required autocomplete="organization-title" placeholder="Ej. Gerente de expansión"><span data-error aria-live="polite"></span></div>
+        </div>
+        <div class="row">
+          <div class="qf" data-campo><label for="c-nom">Nombre</label><input id="c-nom" name="nombre" required autocomplete="name" placeholder="Nombre y apellido"><span data-error aria-live="polite"></span></div>
+          <div class="qf" data-campo><label for="c-tel">Teléfono</label><input id="c-tel" name="telefono" type="tel" required inputmode="tel" autocomplete="tel-national" placeholder="9XX XXX XXX"><span data-error aria-live="polite"></span></div>
+        </div>
+        <div class="row">
+          <div class="qf" data-campo><label for="c-dep">Departamento</label><select id="c-dep" name="departamento" data-departamentos></select></div>
+          <div class="qf" data-campo><label for="c-tie">Nº de tiendas</label><input id="c-tie" name="tiendas" type="number" min="1" required inputmode="numeric" placeholder="Ej. 8"><span data-error aria-live="polite"></span></div>
+        </div>
+        <div class="row">
+          <div class="qf" data-campo><label for="c-pro">Tipo de proyecto</label><select id="c-pro" name="proyecto"><option>Tiendas nuevas</option><option>Remodelación</option><option>Roll-out de formato</option><option>Check-outs y cajas</option><option>Exhibición de temporada</option></select></div>
+          <div class="qf" data-campo><label for="c-cor">Correo (opcional)</label><input id="c-cor" name="correo" type="email" autocomplete="email" placeholder="nombre@empresa.com"><span data-error aria-live="polite"></span></div>
+        </div>
+        <button class="btn" type="submit">Enviar solicitud <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <div class="qform__meta"><span><i class="dot" aria-hidden="true"></i><span data-estado>Asesor en línea</span></span><a href="https://wa.me/51903260296" target="_blank" rel="noopener">WhatsApp 903 260 296</a></div>
+        <p class="ok" data-ok hidden tabindex="-1">Listo: abrimos WhatsApp con tu solicitud. Envíala y un asesor corporativo te contactará.</p>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><img src="assets/img/logo-nuova-light-1.png" alt="Nuova · Universo de góndolas" width="900" height="300"><p>Diseñamos, fabricamos e instalamos mobiliario comercial.</p></div>
+      <div><h4>Planta</h4><p>Parcela 10900 Mza. A Lote 8,<br>Urb. Jardines La Gloria,<br>Ate, Lima 15476</p></div>
+      <div><h4>Contacto</h4><ul><li><a href="https://wa.me/51903260296" target="_blank" rel="noopener">WhatsApp 903 260 296</a></li><li><a href="tel:+51903260296">Llamar 903 260 296</a></li><li>Lun–Sáb, 8:00–18:00</li></ul></div>
+      <div><h4>Redes</h4><ul><li><a href="https://www.linkedin.com/search/results/all/?keywords=Nuova%20Per%C3%BA%20Universo%20de%20G%C3%B3ndolas" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="https://www.facebook.com/nuova.pe" target="_blank" rel="noopener">Facebook</a></li><li><a href="https://www.instagram.com/nuovaperu.universodegondolas" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.youtube.com/@nuovaperu" target="_blank" rel="noopener">YouTube</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 Nuova Perú · Universo de góndolas</span><a href="https://nuova.pe/" target="_blank" rel="noopener">nuova.pe</a></div>
+  </div>
+</footer>
+
+<a class="fab" href="https://wa.me/51903260296?text=Hola%20Nuova%2C%20quiero%20una%20propuesta%20de%20implementaci%C3%B3n%20para%20mi%20cadena." target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4C2.7 15.6 2.2 13.8 2.2 12 2.2 6.6 6.6 2.2 12 2.2S21.8 6.6 21.8 12 17.4 21.8 12 21.8zM12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.8 1 3.8 1.5 5.8 1.5 6.6 0 12-5.4 12-12S18.6 0 12 0z"/></svg>
+</a>
+
+<script src="assets/js/lead.js"></script>
+<script>
+(function(){
+  var LINES=[
+    {n:'Góndolas',c:'33 productos',img:'assets/img/gondola-metalica-de-central-con-dos-cabeceras-nuova-fabricantes-de-gondolas-estantes.png',d:'De melamina y metálicas, para el pasillo central, la cabecera, la pared o la carga pesada.',t:['Centrales','Cabecera','Pared','Carga','Premium']},
+    {n:'Módulos',c:'35 productos',img:'assets/img/modulos-de-licor.jpg',photo:1,d:'Módulos de melamina a medida para exhibir, atender y vender a granel.',t:['Exhibición','Granel','Atención','Licorero','Verdulero']},
+    {n:'Check-outs',c:'6 productos',img:'assets/img/soluciones-impulsan-3.png',photo:1,d:'Zona de cajas con la identidad de tu marca, pensada para el flujo de clientes de tu tienda.',t:['Cajas','Zona de pago','Marca propia']},
+    {n:'Estructuras',c:'8 productos',img:'assets/img/estructura-de-ropa-metalica-exhibidor-nuova-fabricantes-de-gondolas-estantes.png',d:'Estructuras metálicas para moda, calzado y exhibición especial.',t:['Exhibidor de ropa','Cartulinero','Especiales']},
+    {n:'Canastas y coches',c:'8 productos',img:'assets/img/canastas-y-coches.jpg',photo:1,d:'Canastas, coches y jabas para supermercados y tiendas de mejoramiento del hogar.',t:['Canastas','Coches','Jabas']},
+    {n:'Accesorios',c:'+ Lockers',img:'assets/img/forro-malla-1.png',d:'Bandejas, ganchos, forros y separadores para góndolas, más lockers para guardarropa.',t:['Bandejas','Ganchos','Forros','Lockers']}
+  ];
+  var rail=document.getElementById('rail'),img=document.getElementById('pImg'),nm=document.getElementById('pName'),
+      ct=document.getElementById('pCount'),ds=document.getElementById('pDesc'),tg=document.getElementById('pTags');
+  function show(i){
+    var L=LINES[i];
+    rail.querySelectorAll('.ptag').forEach(function(b,j){b.setAttribute('aria-selected',j===i?'true':'false');b.tabIndex=j===i?0:-1});
+    img.classList.add('is-swap');
+    setTimeout(function(){img.src=L.img;img.alt=L.n;img.classList.toggle('is-photo',!!L.photo);img.classList.remove('is-swap')},160);
+    nm.textContent=L.n;ct.textContent=L.c;ds.textContent=L.d;
+    tg.innerHTML=L.t.map(function(x){return '<li>'+x+'</li>'}).join('');
+  }
+  LINES.forEach(function(L,i){
+    var b=document.createElement('button');b.type='button';b.className='ptag';b.setAttribute('role','tab');b.setAttribute('aria-controls','panel');
+    b.innerHTML='<b>'+L.n+'</b><small>'+L.c+'</small>';
+    b.addEventListener('click',function(){show(i)});
+    b.addEventListener('keydown',function(e){var k=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(!k)return;e.preventDefault();var j=(i+k+LINES.length)%LINES.length;rail.children[j].focus();show(j)});
+    rail.appendChild(b);
+  });
+  show(0);
+  var lg=document.getElementById('logos');
+  [[2,'Market Súper León'],[8,'Antonella Market'],[24,'Mister Market'],[21,'Mini Market Peñita'],[16,'Toky Asian Food Market'],[18,'Carrasco Tienda Minorista'],[25,'Inversiones Proat Perú, ferretería'],[5,'Segurindustrias Sabaoth'],[13,'Temaho Perú'],[14,'Nena Importaciones'],[10,'Panadería El Buen Pan'],[6,'Patitas & Bigotes Vet']].forEach(function(c){var n=c[0],i=document.createElement('img');i.src='assets/clientes/logo-'+n+'.png';i.alt=c[1];i.loading='lazy';i.width=360;i.height=200;lg.appendChild(i)});
+})();
+</script>
+</body>
+</html>
